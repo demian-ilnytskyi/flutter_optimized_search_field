@@ -45,92 +45,95 @@ class OptimizedSearchField extends StatelessWidget {
         ),
         super(key: key);
 
-  // Callback for text change
+  /// Callback for text change
   final void Function(String text)? onChanged;
 
-  // Label text for the search field
+  /// Label text for the search field
   final String? labelText;
 
-  // List of dropdown items
+  /// List of dropdown items
   final List<String> dropDownList;
 
-  // Whether to show the error text
+  /// Whether to show the error text
   final bool? showErrorText;
 
-  // Error text for the search field
+  /// Error text for the search field
   final String? errorText;
 
-  // Controller for the search field
+  /// Controller for the search field
   final TextEditingController? controller;
 
-  // Focus node for the search field
+  /// Focus node for the search field
   final FocusNode? focusNode;
 
-  // Key for the text field
+  /// Key for the text field
   final Key? textFieldKey;
 
-  // Description for the search field
+  /// Description for the search field
   final String? description;
 
-  // Whether the search field is required
+  /// Whether the search field is required
   final bool? isRequired;
 
-  // Style for the dropdown items
+  /// Style for the dropdown items
   final TextStyle? itemTextStyle;
 
-  // Maximum height for the menu
+  /// Maximum height for the menu
   final double menuMaxHeight;
 
-  // Margin for the menu
+  /// Margin for the menu
   final EdgeInsets menuMargin;
 
-  // Decoration for the menu
+  /// Decoration for the menu
   final BoxDecoration? menuDecoration;
 
-  // Padding for the list inside the menu
+  /// Padding for the list inside the menu
   final EdgeInsets listPadding;
 
-  // Space between items in the list
+  /// Space between items in the list
   final double? itemsSpace;
 
-  // Style for the items
+  /// Style for the items
   final ButtonStyle? itemStyle;
 
-  // Clip behavior for the list
+  /// Clip behavior for the list
   final Clip listClipBehavior;
 
-  // Decoration for the search field
+  /// Decoration for the search field
   final InputDecoration? fieldDecoration;
 
-  // Active icon for the search field
+  /// Active icon for the search field
   final Icon fieldActiveIcon;
 
-  // Inactive icon for the search field
+  /// Inactive icon for the search field
   final Icon fieldInactiveIcon;
 
-  // Suffix icon for the search field
+  /// Suffix icon for the search field
   final Widget? fieldSuffixIcon;
 
-  // Whether to use the prototype
+  /// Whether to use the prototype
   final bool usePrototype;
 
-  // Input formatters for the search field
+  /// Input formatters for the search field
   final List<TextInputFormatter>? fieldInputFormatters;
 
-  // Options builder for the search field
+  /// Options builder for the search field
   final FutureOr<Iterable<String>> Function(TextEditingValue)? optionsBuilder;
 
-  // Custom text field widget
+  /// Custom text field widget
   final Widget Function({required Widget suffixIcon, required GlobalKey key})?
       customTextField;
 
+  /// Style for the label text
   final TextStyle? labelTextStyle;
 
+  /// Direction for the options view
   final OptionsViewOpenDirection optionsViewOpenDirection;
 
+  /// Initial value for the text field
   final TextEditingValue? initValue;
 
-  // Custom list item widget
+  /// Custom list item widget
   final Widget Function({
     required String value,
     required bool isEnabled,

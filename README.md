@@ -18,7 +18,6 @@ A Flutter package that provides optimized search fields with various customizati
 
 Below are some previews demonstrating the key features of the package:
 
-
 ### [Search Field](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart)
 
 <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
@@ -86,21 +85,17 @@ OptimizedSearchField(
 ---
 ### BasicSearchField
 
-BasicSearchField
-
-Description:
+**Description:**  
 A much more customizable version of OptimizedSearchField. While it requires more parameters for setup, it supports both text and model-based searches—allowing each search result to include descriptions, images, or other elements.
 
-Pros:
+**Pros:**  
+- Extensive customization options  
+- Supports complex data types
 
-   - Extensive customization options
-   - Supports complex data types
+**Cons:**  
+- More complex setup compared to OptimizedSearchField
 
-Cons:
-
-   - More complex setup compared to OptimizedSearchField
-
-#### Example Usage
+**Example Usage:**
 
 ```dart
 BasicSearchField<MyModel>(
@@ -123,22 +118,21 @@ BasicSearchField<MyModel>(
   },
 )
 ```
+
 ---
 ### MultiSearchField
 
-Description:
+**Description:**  
 A search field tailored for array-based searches. It does not trigger actions on every keystroke. Instead, it waits until the user presses enter to trigger a method that adds the typed element to the selected items.
 
-Pros:
+**Pros:**  
+- Ideal for building multi-selection inputs  
+- Prevents premature search triggering
 
-   - Ideal for building multi-selection inputs
-   - Prevents premature search triggering
+**Cons:**  
+- Not suitable for real-time search feedback
 
-Cons:
-
-   - Not suitable for real-time search feedback
-
-#### Example Usage
+**Example Usage:**
 
 ```dart
 MultiSearchField(
@@ -157,22 +151,21 @@ MultiSearchField(
   menuMaxHeight: 400,
 )
 ```
+
 ---
 ### BasicMultiSearchField
 
-Description:
+**Description:**  
 A highly customizable version of MultiSearchField that supports model-based searches. Each search result can include rich content such as descriptions and images, offering greater flexibility at the cost of a more complex configuration.
 
-Pros:
+**Pros:**  
+- High customizability for multi-selection scenarios  
+- Supports detailed and complex data representations
 
-   - High customizability for multi-selection scenarios
-   - Supports detailed and complex data representations
+**Cons:**  
+- Increased configuration complexity
 
-Cons:
-
-   - Increased configuration complexity
-
-#### Example Usage
+**Example Usage:**
 
 ```dart
 BasicMultiSearchField<MyModel>(
@@ -209,3 +202,64 @@ BasicMultiSearchField<MyModel>(
   ),
 )
 ```
+
+## Public API Documentation
+
+### BasicMultiSearchField
+
+**Properties:**
+
+- `allElements`: All elements text.
+- `controller`: Controller for the search field.
+- `customTextField`: Custom text field widget.
+- `description`: Description for the search field.
+- `dropDownList`: List of dropdown items.
+- `errorText`: Error text for the search field.
+- `fieldActiveIcon`: Active icon for the search field.
+- `fieldDecoration`: Decoration for the search field.
+- `fieldInactiveIcon`: Inactive icon for the search field.
+- `fieldInputFormatters`: Input formatters for the search field.
+- `fieldSuffixIcon`: Suffix icon for the search field.
+- `focusNode`: Focus node for the search field.
+- `getItemText`: Function to get the text for an item.
+- `isRequired`: Whether the search field is required.
+- `item`: Widget for each item in the dropdown.
+- `itemStyle`: Style for the items.
+- `labelText`: Label text for the search field.
+- `labelTextStyle`: Style for the label text.
+- `listClipBehavior`: Clip behavior for the list.
+- `listItem`: Custom list item widget.
+- `menuDecoration`: Decoration for the menu.
+- `menuMargin`: Margin for the menu.
+- `menuMaxHeight`: Maximum height for the menu.
+- `onChanged`: Callback for text change.
+- `onFieldSubmitted`: Callback for field submission.
+- `onSelected`: Callback for item selection.
+- `optionsBuilder`: Function to build the options for the dropdown.
+- `optionsViewOpenDirection`: Direction for the options view.
+- `removeEvent`: Callback for removing an item.
+- `selectedItemClipBehavior`: Clip behavior for the selected item.
+- `selectedItemIcon`: Icon for the selected item.
+- `selectedItemMaxLines`: Maximum number of lines for the selected item.
+- `selectedItemSpacing`: Spacing for the selected item.
+- `selectedItemStyle`: Style for the selected item.
+- `selectedItemTextAlign`: Text alignment for the selected item.
+- `selectedItemTextOverflow`: Text overflow for the selected item.
+- `selectedItemTextStyle`: Text style for the selected item.
+- `selectedWidget`: Widget for the selected item.
+- `showErrorText`: Whether to show the error text.
+- `suffixIconPadding`: Padding for the suffix icon.
+- `textFieldKey`: Key for the text field.
+- `trailingList`: List of trailing widgets.
+- `unfocusSuffixIcon`: Suffix icon for the search field when unfocused.
+- `values`: List of selected values.
+
+**Methods:**
+
+- `build`: Builds the widget tree.
+- `dispose`: Disposes of the controller and focus node.
+- `initState`: Initializes the controller and focus node.
+- `unFocusData`: Unfocuses the data when the focus node loses focus.
+- `handleKeyEvent`: Handles key events for the focus node.
+
+For more detailed documentation, please refer to the source code and comments within the package.
