@@ -34,17 +34,17 @@ Below are some previews demonstrating the key features of the package:
   </tr>
   <tr>
     <th>
-        <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart">
+        <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/saerch_field_preview.gif">
             <img src="saerch_field_preview.gif" alt="Search Field" />
         </a>
     </th>
     <th>
-      <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart">
+      <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/multi_search_field_preview.gif">
         <img src="multi_search_field_preview.gif" alt="Multi Search" />
       </a>
     </th>
     <th>
-      <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/based_search_field.dart">
+      <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/adavptive_menu_position.gif">
         <img src="adavptive_menu_position.gif" alt="Adaptive Menu Position" />
       </a>
     </th>
