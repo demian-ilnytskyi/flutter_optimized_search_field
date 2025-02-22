@@ -6,3 +6,5 @@ Updated ReadMe
 Updated ReadMe
 ## 0.0.1+3
 Updated ReadMe and Comments
+## 0.0.1+4
+Fix changelog
