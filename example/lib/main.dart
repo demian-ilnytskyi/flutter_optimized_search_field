@@ -1,5 +1,5 @@
-import 'package:example/test.dart';
 import 'package:flutter/material.dart';
+import 'package:optimized_search_field/optimized_search_field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +13,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Optimized Search Field Example',
+      theme: ThemeData(
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            mouseCursor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.disabled)) {
+                return SystemMouseCursors.forbidden;
+              }
+              return SystemMouseCursors.click;
+            }),
+          ),
+        ),
+      ),
       home: const HomePage(),
     );
   }
@@ -27,9 +39,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late String currentItem;
+  late List<String> currentItems;
   @override
   void initState() {
     currentItem = 'none';
+    currentItems = [];
     super.initState();
   }
 
@@ -37,29 +51,52 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 800),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Column(
-              spacing: 40,
-              children: [
-                Text(
-                  'You Choose: $currentItem',
-                  style: TextStyle(fontSize: 24),
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
+          children: [
+            Text('You Entered: $currentItem', style: TextStyle(fontSize: 24)),
+            SizedBox(height: 200),
+            OptimizedSearchField(
+              onChanged:
+                  (text) => setState(() {
+                    currentItem = text;
+                  }),
+              labelText: 'Enter Item',
+              dropDownList: List.generate(
+                100000,
+                (index) => 'item ${index + 1}',
+              ),
+              itemStyle: const ButtonStyle(
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                 ),
-                OptimizedSearchField(
-                  onChanged:
-                      (text) => setState(() {
-                        currentItem = text;
-                      }),
-                  labelText: currentItem,
-                  dropDownList: List.generate(1000, (index) => 'item $index'),
-                  itemTextStyle: TextStyle(),
+                padding: WidgetStatePropertyAll(
+                  EdgeInsets.symmetric(vertical: 16),
                 ),
-              ],
+              ),
+              menuMaxHeight: 200,
+              optionsViewOpenDirection: OptionsViewOpenDirection.up,
             ),
-          ),
+            SizedBox(height: 200),
+            MultiSearchField(
+              labelText: 'Enter Items',
+              dropDownList: List.generate(
+                100000,
+                (index) => 'item ${index + 1}',
+              ),
+              removeEvent:
+                  (value) => setState(() {
+                    currentItems.remove(value);
+                  }),
+              values: currentItems,
+              onChanged:
+                  (text) => setState(() {
+                    currentItems.add(text);
+                  }),
+              menuMaxHeight: 400,
+            ),
+            SizedBox(height: 800),
+          ],
         ),
       ),
     );

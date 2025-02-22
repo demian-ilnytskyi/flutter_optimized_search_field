@@ -1,5 +1,4 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'based_multi_search_field.dart';
+export 'based_search_field.dart';
+export 'multi_search_field.dart';
+export 'optimized_search_field_widget.dart';
