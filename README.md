@@ -21,13 +21,13 @@ Below are some previews demonstrating the key features of the package:
 
 ### [Search Field](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart)
 
-![Search Field](saerch_field_preview.gif)
+<img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
 ### [Multi Search](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart)
 
-![Multi Search](multi_search_field_preview.gif)
+<img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/multi_search_field_preview.gif">
 ### [Adaptive Menu Position](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/based_search_field.dart)
 
-![Adaptive Menu Position](adavptive_menu_position.gif) 
+<img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
   * This gif shows that if there isn’t enough space above the widget, the menu will adapt and display from the bottom—even if the top position is selected. First has position up and second has down*
 
 ## Features
