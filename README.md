@@ -19,39 +19,21 @@ A Flutter package that provides optimized search fields with various customizati
 Below are some previews demonstrating the key features of the package:
 
 
-<markdown-accessiblity-table>
-<table>
-  <tr>
-    <th>
-        <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart">Search Field</a>
-    </th>
-    <th>
-        <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart">Multi Search</a>
-    </th>
-    <th>
-        <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/based_search_field.dart">Adaptive Menu Position</a>
-    </th>
-  </tr>
-  <tr>
-    <th>
-        <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/saerch_field_preview.gif">
-            <img src="saerch_field_preview.gif" alt="Search Field" />
-        </a>
-    </th>
-    <th>
-      <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/multi_search_field_preview.gif">
-        <img src="multi_search_field_preview.gif" alt="Multi Search" />
-      </a>
-    </th>
-    <th>
-      <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/adavptive_menu_position.gif">
-        <img src="adavptive_menu_position.gif" alt="Adaptive Menu Position" />
-      </a>
-    </th>
-  </tr>
-</table>
-</markdown-accessiblity-table>
-  *Adaptive Menu Position - This gif shows that if there isn’t enough space above the widget, the menu will adapt and display from the bottom—even if the top position is selected. First has position up and second has down*
+### [Search Field](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart)
+
+| ![Search Field](saerch_field_preview.gif) |
+|:---:|
+
+### [Multi Search](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart)
+
+| ![Multi Search](multi_search_field_preview.gif) |
+|:---:|
+
+### [Adaptive Menu Position](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/based_search_field.dart)
+
+| ![Adaptive Menu Position](adavptive_menu_position.gif) |
+|:---:|
+  * This gif shows that if there isn’t enough space above the widget, the menu will adapt and display from the bottom—even if the top position is selected. First has position up and second has down*
 
 ## Features
 
