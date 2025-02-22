@@ -229,7 +229,3 @@ BasicMultiSearchField<MyModel>(
   ),
 )
 ```
-
-## Additional Information
-
-For more information, please refer to the documentation or the example provided in the `/example` folder. Contributions are welcome! If you encounter any issues, please file them on the GitHub repository. We aim to respond to issues promptly.
