@@ -1,6 +1,6 @@
 name: optimized_search_field
 description: A Flutter package with customizable search fields for large lists, models, and rich content. Includes single and multi-search options with various optimizations.
-version: 0.0.1+1
+version: 0.0.1+2
 homepage: https://github.com/DemienIlnutskiy/flutter_optimized_search_field
 
 environment:
