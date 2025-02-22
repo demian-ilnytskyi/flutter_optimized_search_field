@@ -1,2 +1,4 @@
 ## 0.0.1
 Init Version
+## 0.0.1+1
+Updated ReadMe
