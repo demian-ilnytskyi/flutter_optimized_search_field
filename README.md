@@ -21,9 +21,7 @@ Below are some previews demonstrating the key features of the package:
 
 ### [Search Field](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart)
 
-
-<img src="https://raw.githubusercontent.com/rohanjariwala03/drop_down_search_field/master/multi_select_dropdown_search_field.gif" width="100%">
-
+![Search Field](saerch_field_preview.gif)
 ### [Multi Search](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart)
 
 ![Multi Search](multi_search_field_preview.gif)
