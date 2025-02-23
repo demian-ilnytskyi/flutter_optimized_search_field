@@ -8,3 +8,5 @@ Updated ReadMe
 Updated ReadMe and Comments
 ## 1.0.0
 Release Version. Fix some functionality and added tests
+## 1.0.0+1
+Removed wrong assert
