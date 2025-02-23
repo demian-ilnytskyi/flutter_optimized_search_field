@@ -1,12 +1,14 @@
 ## 0.0.1
-Init Version
+- Init Version
 ## 0.0.1+1
-Updated ReadMe
+- Updated ReadMe
 ## 0.0.1+2
-Updated ReadMe
+- Updated ReadMe
 ## 0.0.1+3
-Updated ReadMe and Comments
+- Updated ReadMe and Comments
 ## 1.0.0
-Release Version. Fix some functionality and added tests
+- Release Version. Fix some functionality and added tests
 ## 1.0.0+1
-Removed wrong assert
+- Removed wrong assert
+## 1.0.0+2
+- Updated ReadMe
