@@ -141,6 +141,7 @@ class OptimizedSearchField extends StatelessWidget {
     required TextEditingController controller,
     required FocusNode focusNode,
     required void Function(String)? onChanged,
+    required void Function(String)? onSubmitted,
   })? customTextField;
 
   /// Style for the label text

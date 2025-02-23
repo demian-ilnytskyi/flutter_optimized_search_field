@@ -39,12 +39,12 @@ void main() {
             onChanged: (text) => textValue = text,
             labelText: 'Enter Item',
             item: null,
-            itemStyle: const ButtonStyle(
-              shape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(),
+            itemStyle: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                const RoundedRectangleBorder(),
               ),
-              padding: WidgetStatePropertyAll(
-                EdgeInsets.symmetric(vertical: 16),
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.symmetric(vertical: 16),
               ),
             ),
             menuMaxHeight: value,
@@ -87,6 +87,7 @@ void main() {
               required onChanged,
               required suffixIcon,
               required textFieldKey,
+              required onSubmitted,
             }) =>
                 SizedBox(
               key: textFieldKey,
@@ -98,6 +99,7 @@ void main() {
                 decoration: InputDecoration(
                   suffixIcon: suffixIcon,
                 ),
+                onSubmitted: onSubmitted,
               ),
             ),
           );

@@ -56,14 +56,15 @@ void main() {
                 showErrorText: true,
                 errorText: 'Error',
                 getItemText: null,
-                itemStyle: const ButtonStyle(
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(),
+                itemStyle: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    const RoundedRectangleBorder(),
                   ),
-                  padding: WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(vertical: 16),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 16),
                   ),
                 ),
+                selectedItemStyle: const ButtonStyle(),
                 selectedListKey: selectedListKey,
                 selectedListItemKey: selectedListdItemsKey,
                 listItemKey: listdItemsKey,
@@ -104,6 +105,7 @@ void main() {
                   required onChanged,
                   required suffixIcon,
                   required textFieldKey,
+                  required onSubmitted,
                 }) =>
                     SizedBox(
                   key: textFieldKey,
@@ -115,6 +117,7 @@ void main() {
                     decoration: InputDecoration(
                       suffixIcon: suffixIcon,
                     ),
+                    onSubmitted: onSubmitted,
                   ),
                 ),
               );

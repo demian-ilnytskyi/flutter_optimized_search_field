@@ -7,7 +7,6 @@ class _SelectedChipWidget extends StatelessWidget {
     Key? key,
     this.style,
     this.textStyle,
-    this.padding,
     this.maxLines = 2,
     this.clipBehavior = Clip.hardEdge,
     this.textAlign = TextAlign.center,
@@ -31,9 +30,6 @@ class _SelectedChipWidget extends StatelessWidget {
   // Text style for the chip
   final TextStyle? textStyle;
 
-  // Padding for the chip
-  final EdgeInsets? padding;
-
   // Maximum number of lines for the chip text
   final int? maxLines;
 
@@ -56,16 +52,16 @@ class _SelectedChipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       key: widgetKey,
-      style: padding == null
-          ? buttonStyle
-          : buttonStyle.copyWith(padding: WidgetStatePropertyAll(padding)),
+      style: buttonStyle,
       clipBehavior: clipBehavior ?? Clip.hardEdge,
       onPressed: onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        spacing: spacing ?? 8,
         children: [
           icon ?? const Icon(Icons.close),
+          SizedBox(
+            width: spacing ?? 8,
+          ),
           Flexible(child: textWidget),
         ],
       ),
@@ -83,13 +79,15 @@ class _SelectedChipWidget extends StatelessWidget {
       );
 }
 
-const defaultCancelChipButtonStyle = ButtonStyle(
-  padding: WidgetStatePropertyAll(
-    EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+final defaultCancelChipButtonStyle = ButtonStyle(
+  padding: MaterialStateProperty.all(
+    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
   ),
   alignment: Alignment.center,
-  backgroundColor: WidgetStatePropertyAll(Color(0xffc4fffc)),
-  shape: WidgetStatePropertyAll(
-    RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
+  backgroundColor: MaterialStateProperty.all(const Color(0xffc4fffc)),
+  shape: MaterialStateProperty.all(
+    const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(32)),
+    ),
   ),
 );

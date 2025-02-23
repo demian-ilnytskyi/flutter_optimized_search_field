@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -57,20 +57,19 @@ class _HomePageState extends State<HomePage> {
             Text('You Entered: $currentItem', style: TextStyle(fontSize: 24)),
             SizedBox(height: 200),
             OptimizedSearchField(
-              onChanged:
-                  (text) => setState(() {
-                    currentItem = text;
-                  }),
+              onChanged: (text) => setState(() {
+                currentItem = text;
+              }),
               labelText: 'Enter Item',
               dropDownList: List.generate(
                 100000,
                 (index) => 'item ${index + 1}',
               ),
-              itemStyle: const ButtonStyle(
-                shape: WidgetStatePropertyAll(
+              itemStyle: ButtonStyle(
+                shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                 ),
-                padding: WidgetStatePropertyAll(
+                padding: MaterialStateProperty.all(
                   EdgeInsets.symmetric(vertical: 16),
                 ),
               ),
@@ -84,16 +83,22 @@ class _HomePageState extends State<HomePage> {
                 100000,
                 (index) => 'item ${index + 1}',
               ),
-              removeEvent:
-                  (value) => setState(() {
-                    currentItems.remove(value);
-                  }),
+              removeEvent: (value) => setState(() {
+                currentItems.remove(value);
+              }),
               values: currentItems,
-              onSelected:
-                  (text) => setState(() {
-                    currentItems.add(text);
-                  }),
+              onSelected: (text) => setState(() {
+                currentItems.add(text);
+              }),
               menuMaxHeight: 400,
+              selectedItemStyle: ButtonStyle(
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 800),
           ],

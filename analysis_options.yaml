@@ -2,6 +2,7 @@ include: package:very_good_analysis/analysis_options.5.1.0.yaml
 
 analyzer:
   errors:
+    deprecated_member_use: ignore
     only_throw_errors: ignore
     unused_shown_name: ignore
   exclude:
