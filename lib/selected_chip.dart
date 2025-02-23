@@ -7,7 +7,6 @@ class _SelectedChipWidget extends StatelessWidget {
     Key? key,
     this.style,
     this.textStyle,
-    this.padding,
     this.maxLines = 2,
     this.clipBehavior = Clip.hardEdge,
     this.textAlign = TextAlign.center,
@@ -31,9 +30,6 @@ class _SelectedChipWidget extends StatelessWidget {
   // Text style for the chip
   final TextStyle? textStyle;
 
-  // Padding for the chip
-  final EdgeInsets? padding;
-
   // Maximum number of lines for the chip text
   final int? maxLines;
 
@@ -56,9 +52,7 @@ class _SelectedChipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       key: widgetKey,
-      style: padding == null
-          ? buttonStyle
-          : buttonStyle.copyWith(padding: MaterialStateProperty.all(padding)),
+      style: buttonStyle,
       clipBehavior: clipBehavior ?? Clip.hardEdge,
       onPressed: onPressed,
       child: Row(

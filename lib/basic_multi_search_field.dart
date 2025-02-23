@@ -186,6 +186,7 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
     required TextEditingController controller,
     required FocusNode focusNode,
     required void Function(String)? onChanged,
+    required void Function(String)? onSubmitted,
   })? customTextField;
 
   // Widget for the selected item
@@ -393,10 +394,6 @@ class _BasicMultiSearchFieldState<T extends Object>
                   _SelectedChipWidget(
                     widgetKey: widget.selectedListItemKey,
                     labelText: getItemText(getValue(index)),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
                     onPressed: () => widget.removeEvent?.call(getValue(index)),
                     maxLines: widget.selectedItemMaxLines,
                     style: widget.selectedItemStyle,

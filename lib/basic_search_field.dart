@@ -186,6 +186,7 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     required TextEditingController controller,
     required FocusNode focusNode,
     required void Function(String)? onChanged,
+    required void Function(String)? onSubmitted,
   })? customTextField;
 
   /// Style for the label text
@@ -467,6 +468,7 @@ class _BasicSearchFieldState<T extends Object>
                 controller: controller,
                 focusNode: focusNode,
                 onChanged: widget.onChanged,
+                onSubmitted: widget.onFieldSubmitted,
               ) ??
               _TextFieldWidget(
                 key: _anchorKey,

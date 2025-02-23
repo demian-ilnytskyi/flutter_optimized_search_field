@@ -105,6 +105,7 @@ void main() {
                   required onChanged,
                   required suffixIcon,
                   required textFieldKey,
+                  required onSubmitted,
                 }) =>
                     SizedBox(
                   key: textFieldKey,
@@ -116,6 +117,7 @@ void main() {
                     decoration: InputDecoration(
                       suffixIcon: suffixIcon,
                     ),
+                    onSubmitted: onSubmitted,
                   ),
                 ),
               );
