@@ -9,7 +9,7 @@ G_DECLARE_FINAL_TYPE(MyApplication, my_application, MY, APPLICATION,
 /**
  * my_application_new:
  *
- * Creates a new Flutter-based application.
+ * Creates a new Flutter-basic application.
  *
  * Returns: a new #MyApplication.
  */

@@ -1,4 +1,4 @@
-part of 'based_multi_search_field.dart';
+part of 'basic_multi_search_field.dart';
 
 class _SelectedChipWidget extends StatelessWidget {
   const _SelectedChipWidget({
@@ -14,7 +14,10 @@ class _SelectedChipWidget extends StatelessWidget {
     this.textOverflow = TextOverflow.ellipsis,
     this.icon = const Icon(Icons.close),
     this.spacing = 8,
+    this.widgetKey,
   }) : super(key: key);
+
+  final Key? widgetKey;
 
   // Label text for the chip
   final String labelText;
@@ -52,6 +55,7 @@ class _SelectedChipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      key: widgetKey,
       style: padding == null
           ? buttonStyle
           : buttonStyle.copyWith(padding: WidgetStatePropertyAll(padding)),

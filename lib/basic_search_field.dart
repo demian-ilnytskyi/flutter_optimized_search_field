@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,10 +12,9 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   const BasicSearchField({
     required this.labelText,
     required this.optionsBuilder,
-    required this.items,
+    required this.item,
     required this.onChanged,
     required this.onSelected,
-    required this.isLoading,
     this.itemStyle,
     this.unenabledList = const [],
     this.menuMaxHeight = 400,
@@ -27,7 +27,7 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
     this.textFieldKey,
     this.isRequired,
-    this.onSelectedItem,
+    this.displayStringForOption,
     Key? key,
     this.showErrorText,
     this.errorText,
@@ -40,8 +40,8 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     this.textStyle,
     this.fieldSuffixIcon,
     this.customTextField,
-    this.list,
-    this.listItem,
+    this.menuList,
+    this.listButtonItem,
     this.fieldDecoration,
     this.useFindChildIndexCallback = true,
     this.usePrototype = true,
@@ -50,9 +50,20 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
     this.initValue,
     this.onFieldSubmitted,
+    this.listKey,
+    this.listItemKey,
+    this.listCacheExtent,
+    this.listAddSemanticIndexes = true,
+    this.listController,
+    this.listRestorationId,
+    this.listSemanticChildCount,
+    this.listDragStartBehavior = DragStartBehavior.start,
+    this.listPhysics,
+    this.listPrimary,
+    this.fieldIconKey,
   })  : assert(
-          !(labelText == null && customTextField == null),
-          'Either provide a [labelText] or a custom [customTextField].',
+          !(item == null && listButtonItem == null),
+          'Either provide a [listItem] or a custom [listButtonItem].',
         ),
         super(key: key);
 
@@ -75,7 +86,7 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// Widget to display each item
-  final Widget Function(T element) items;
+  final Widget Function(T element)? item;
 
   /// Options builder for the search field
   final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
@@ -87,7 +98,7 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   final void Function(T)? onSelected;
 
   /// Function to get the display string for the selected item
-  final String Function(T value)? onSelectedItem;
+  final String Function(T value)? displayStringForOption;
 
   /// Padding for the suffix icon
   final double? suffixIconPadding;
@@ -106,9 +117,6 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
 
   /// List of unenabled items
   final List<T>? unenabledList;
-
-  /// Whether the search field is loading
-  final bool isLoading;
 
   /// Whether the search field is required
   final bool? isRequired;
@@ -144,15 +152,19 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   final Widget? fieldSuffixIcon;
 
   /// Custom list widget
-  final Widget Function(Iterable<T> values)? list;
+  final Widget Function({
+    required int length,
+    required Widget Function(int index) item,
+  })? menuList;
 
   /// Custom list item widget
   final Widget Function({
+    required Key? key,
     required T value,
     required bool isEnabled,
     required int index,
     required void Function() onPressed,
-  })? listItem;
+  })? listButtonItem;
 
   /// Decoration for the search field
   final InputDecoration? fieldDecoration;
@@ -167,8 +179,14 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   final List<TextInputFormatter>? fieldInputFormatters;
 
   /// Custom text field widget
-  final Widget Function({required Widget suffixIcon, required GlobalKey key})?
-      customTextField;
+  final Widget Function({
+    required GlobalKey key,
+    required Key? textFieldKey,
+    required Widget suffixIcon,
+    required TextEditingController controller,
+    required FocusNode focusNode,
+    required void Function(String)? onChanged,
+  })? customTextField;
 
   /// Style for the label text
   final TextStyle? labelTextStyle;
@@ -181,6 +199,21 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
 
   /// Callback for field submission
   final void Function(String)? onFieldSubmitted;
+
+  final Key? listKey;
+
+  final Key? listItemKey;
+
+  final Key? fieldIconKey;
+
+  final double? listCacheExtent;
+  final bool listAddSemanticIndexes;
+  final ScrollController? listController;
+  final String? listRestorationId;
+  final int? listSemanticChildCount;
+  final DragStartBehavior listDragStartBehavior;
+  final ScrollPhysics? listPhysics;
+  final bool? listPrimary;
 
   @override
   State<BasicSearchField<T>> createState() => _BasicSearchFieldState();
@@ -305,14 +338,7 @@ class _BasicSearchFieldState<T extends Object>
   @override
   Widget build(BuildContext context) {
     return RawAutocomplete<T>(
-      optionsBuilder: (textEditingValue) {
-        if (!focusNode.hasFocus) {
-          focusNode.requestFocus();
-        }
-        return widget.optionsBuilder(
-          textEditingValue,
-        );
-      },
+      optionsBuilder: widget.optionsBuilder,
       focusNode: focusNode,
       textEditingController: controller,
       optionsViewOpenDirection: optionsViewOpenDirection,
@@ -320,7 +346,7 @@ class _BasicSearchFieldState<T extends Object>
         Widget getItem(int index) {
           final option = options.elementAt(index);
           final Widget? button;
-          onPressed() {
+          void onPressed() {
             if (widget.onChanged == null) {
               onSelected(option);
             } else {
@@ -330,17 +356,19 @@ class _BasicSearchFieldState<T extends Object>
             }
           }
 
-          if (widget.listItem == null) {
+          if (widget.listButtonItem == null) {
             button = TextButton(
+              key: widget.listItemKey,
               onPressed: buttonEnabled(option) ? onPressed : null,
               style: widget.itemStyle,
-              child: widget.items(option),
+              child: widget.item!.call(option),
             );
           } else {
             button = null;
           }
 
-          return widget.listItem?.call(
+          return widget.listButtonItem?.call(
+                key: widget.listItemKey,
                 value: option,
                 isEnabled: buttonEnabled(option),
                 index: index,
@@ -367,16 +395,28 @@ class _BasicSearchFieldState<T extends Object>
               maxHeight: widget.menuMaxHeight,
               maxWidth: getWidth,
             ),
-            child: widget.list?.call(options) ??
+            child: widget.menuList?.call(
+                  length: options.length,
+                  item: getItem,
+                ) ??
                 Container(
                   margin: widget.menuMargin,
                   decoration: widget.menuDecoration ?? menuDefaultDecoration,
                   clipBehavior: widget.listClipBehavior,
                   child: ListView.builder(
+                    key: widget.listKey,
                     shrinkWrap: true,
                     addAutomaticKeepAlives: false,
                     addRepaintBoundaries: false,
                     padding: widget.listPadding,
+                    cacheExtent: widget.listCacheExtent,
+                    addSemanticIndexes: widget.listAddSemanticIndexes,
+                    controller: widget.listController,
+                    restorationId: widget.listRestorationId,
+                    semanticChildCount: widget.listSemanticChildCount,
+                    dragStartBehavior: widget.listDragStartBehavior,
+                    physics: widget.listPhysics,
+                    primary: widget.listPrimary,
                     prototypeItem: options.isNotEmpty ? getItem(0) : null,
                     findChildIndexCallback: widget.useFindChildIndexCallback
                         ? (key) {
@@ -388,11 +428,14 @@ class _BasicSearchFieldState<T extends Object>
                                   return index;
                                 }
                               } catch (e, stack) {
+                                // coverage:ignore-start
                                 log(
-                                  'OptimizedSearchField: Error in findChildIndexCallback: ',
+                                  'OptimizedSearchField: '
+                                  'Error in findChildIndexCallback: ',
                                   error: e,
                                   stackTrace: stack,
                                 );
+                                // coverage:ignore-end
                               }
                             }
                             return null;
@@ -405,7 +448,7 @@ class _BasicSearchFieldState<T extends Object>
           ),
         );
 
-        if (!widget.isLoading && menuHeight == null) {
+        if (menuHeight == null) {
           setMenuHeight();
           return Opacity(opacity: 0, child: list);
         } else {
@@ -413,13 +456,17 @@ class _BasicSearchFieldState<T extends Object>
         }
       },
       onSelected: widget.onSelected,
-      displayStringForOption:
-          widget.onSelectedItem ?? RawAutocomplete.defaultStringForOption,
+      displayStringForOption: widget.displayStringForOption ??
+          RawAutocomplete.defaultStringForOption,
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) =>
               widget.customTextField?.call(
                 suffixIcon: _suffixIcon,
                 key: _anchorKey,
+                textFieldKey: widget.textFieldKey,
+                controller: controller,
+                focusNode: focusNode,
+                onChanged: widget.onChanged,
               ) ??
               _TextFieldWidget(
                 key: _anchorKey,
@@ -438,12 +485,13 @@ class _BasicSearchFieldState<T extends Object>
                 inputFormatters: widget.fieldInputFormatters,
                 labelTextStyle: widget.labelTextStyle,
                 decoration: widget.fieldDecoration,
-                onFieldSubmitted: widget.onFieldSubmitted,
+                onSubmitted: widget.onFieldSubmitted,
               ),
     );
   }
 
   Widget get _suffixIcon => Padding(
+        key: widget.fieldIconKey,
         padding:
             EdgeInsets.symmetric(horizontal: widget.suffixIconPadding ?? 4),
         child: widget.fieldSuffixIcon ??

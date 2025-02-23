@@ -1,7 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'based_multi_search_field.dart';
+import 'package:optimized_search_field/basic_multi_search_field.dart';
 
 /// A widget that provides a multi-select search field with dropdown options.
 class MultiSearchField extends StatelessWidget {
@@ -10,7 +11,7 @@ class MultiSearchField extends StatelessWidget {
     required this.dropDownList,
     required this.removeEvent,
     required this.values,
-    required this.onChanged,
+    required this.onSelected,
     this.selectListSpacing = 8,
     this.selectListItemSpacing = 8,
     this.selectListItemRunSpacing = 8,
@@ -49,11 +50,26 @@ class MultiSearchField extends StatelessWidget {
     this.focusNode,
     this.labelTextStyle,
     this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
-    this.listItem,
+    this.listButtonItem,
+    this.listCacheExtent,
+    this.listAddSemanticIndexes = true,
+    this.listController,
+    this.listRestorationId,
+    this.listSemanticChildCount,
+    this.listDragStartBehavior = DragStartBehavior.start,
+    this.listPhysics,
+    this.listPrimary,
+    this.menuList,
+    this.fieldIconKey,
+    this.listKey,
+    this.listItemKey,
+    this.selectedListKey,
+    this.selectedListItemKey,
+    this.selectedWidget,
   }) : super(key: key);
 
   /// Callback for text change
-  final void Function(String text)? onChanged;
+  final void Function(String text)? onSelected;
 
   /// Label text for the search field
   final String labelText;
@@ -158,8 +174,14 @@ class MultiSearchField extends StatelessWidget {
   final List<TextInputFormatter>? fieldInputFormatters;
 
   /// Custom text field widget
-  final Widget Function({required Widget suffixIcon, required GlobalKey key})?
-      customTextField;
+  final Widget Function({
+    required GlobalKey key,
+    required Key? textFieldKey,
+    required Widget suffixIcon,
+    required TextEditingController controller,
+    required FocusNode focusNode,
+    required void Function(String)? onChanged,
+  })? customTextField;
 
   /// Run spacing between items in the list
   final double selectListItemRunSpacing;
@@ -181,17 +203,46 @@ class MultiSearchField extends StatelessWidget {
 
   /// Custom list item widget
   final Widget Function({
+    required Key? key,
     required String value,
     required bool isEnabled,
     required int index,
     required void Function() onPressed,
-  })? listItem;
+  })? listButtonItem;
+
+  final double? listCacheExtent;
+  final bool listAddSemanticIndexes;
+  final ScrollController? listController;
+  final String? listRestorationId;
+  final int? listSemanticChildCount;
+  final DragStartBehavior listDragStartBehavior;
+  final ScrollPhysics? listPhysics;
+  final bool? listPrimary;
+
+  /// Custom list widget
+  final Widget Function({
+    required int length,
+    required Widget Function(int index) item,
+  })? menuList;
+
+  final Key? fieldIconKey;
+
+  final Key? listKey;
+
+  final Key? listItemKey;
+
+  final Key? selectedListKey;
+
+  final Key? selectedListItemKey;
+
+  // Widget for the selected item
+  final Widget Function(String value)? selectedWidget;
 
   @override
   Widget build(BuildContext context) {
     return BasicMultiSearchField<String>(
       textFieldKey: textFieldKey,
-      onChanged: onChanged,
+      onSelected: onSelected,
       labelText: labelText,
       dropDownList: dropDownList,
       allElements: allElements,
@@ -200,7 +251,7 @@ class MultiSearchField extends StatelessWidget {
       removeEvent: removeEvent,
       showErrorText: showErrorText,
       errorText: errorText,
-      getItemText: null,
+      getItemText: (value) => value,
       errorMaxLines: errorMaxLines,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty || dropDownList.isEmpty) {
@@ -245,7 +296,23 @@ class MultiSearchField extends StatelessWidget {
       focusNode: focusNode,
       labelTextStyle: labelTextStyle,
       optionsViewOpenDirection: optionsViewOpenDirection,
-      listItem: listItem,
+      listButtonItem: listButtonItem,
+      listCacheExtent: listCacheExtent,
+      listAddSemanticIndexes: listAddSemanticIndexes,
+      listController: listController,
+      listRestorationId: listRestorationId,
+      listSemanticChildCount: listSemanticChildCount,
+      listDragStartBehavior: listDragStartBehavior,
+      listPhysics: listPhysics,
+      listPrimary: listPrimary,
+      menuList: menuList,
+      fieldIconKey: fieldIconKey,
+      listKey: listKey,
+      listItemKey: listItemKey,
+      selectListItemSpacing: selectListItemSpacing,
+      selectedListItemKey: selectedListItemKey,
+      selectedListKey: selectedListKey,
+      selectedWidget: selectedWidget,
     );
   }
 }

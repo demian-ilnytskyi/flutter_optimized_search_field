@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                     currentItems.remove(value);
                   }),
               values: currentItems,
-              onChanged:
+              onSelected:
                   (text) => setState(() {
                     currentItems.add(text);
                   }),
