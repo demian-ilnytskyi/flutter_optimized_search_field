@@ -66,10 +66,10 @@ class _HomePageState extends State<HomePage> {
                 (index) => 'item ${index + 1}',
               ),
               itemStyle: ButtonStyle(
-                shape: MaterialStateProperty.all(
+                shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                 ),
-                padding: MaterialStateProperty.all(
+                padding: WidgetStatePropertyAll(
                   EdgeInsets.symmetric(vertical: 16),
                 ),
               ),

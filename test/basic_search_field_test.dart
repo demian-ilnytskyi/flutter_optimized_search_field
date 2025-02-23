@@ -39,12 +39,12 @@ void main() {
             onChanged: (text) => textValue = text,
             labelText: 'Enter Item',
             item: null,
-            itemStyle: ButtonStyle(
-              shape: MaterialStateProperty.all(
-                const RoundedRectangleBorder(),
+            itemStyle: const ButtonStyle(
+              shape: WidgetStatePropertyAll(
+                RoundedRectangleBorder(),
               ),
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(vertical: 16),
+              padding: WidgetStatePropertyAll(
+                EdgeInsets.symmetric(vertical: 16),
               ),
             ),
             menuMaxHeight: value,

@@ -56,12 +56,12 @@ void main() {
                 showErrorText: true,
                 errorText: 'Error',
                 getItemText: null,
-                itemStyle: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    const RoundedRectangleBorder(),
+                itemStyle: const ButtonStyle(
+                  shape: WidgetStatePropertyAll(
+                    RoundedRectangleBorder(),
                   ),
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 16),
+                  padding: WidgetStatePropertyAll(
+                    EdgeInsets.symmetric(vertical: 16),
                   ),
                 ),
                 selectedListKey: selectedListKey,
