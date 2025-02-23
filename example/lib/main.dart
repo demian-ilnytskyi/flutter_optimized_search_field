@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-            mouseCursor: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.disabled)) {
+            mouseCursor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.disabled)) {
                 return SystemMouseCursors.forbidden;
               }
               return SystemMouseCursors.click;

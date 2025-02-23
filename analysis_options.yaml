@@ -5,11 +5,6 @@ analyzer:
     deprecated_member_use: ignore
     only_throw_errors: ignore
     unused_shown_name: ignore
-  exclude:
-    - lib/**.g.dart
-    - lib/**.freezed.dart
-    - test/**.mocks.dart
-    - lib/**/generated/**.dart
 linter:
   rules:
     public_member_api_docs: false
