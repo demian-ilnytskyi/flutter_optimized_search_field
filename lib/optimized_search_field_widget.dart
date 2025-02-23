@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'based_search_field.dart';
+import 'package:optimized_search_field/basic_search_field.dart';
 
 /// A widget that provides an optimized search field with dropdown options.
 class OptimizedSearchField extends StatelessWidget {
@@ -39,6 +40,18 @@ class OptimizedSearchField extends StatelessWidget {
     this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
     this.initValue,
     this.listItem,
+    this.listKey,
+    this.listItemKey,
+    this.listCacheExtent,
+    this.listAddSemanticIndexes = true,
+    this.listController,
+    this.listRestorationId,
+    this.listSemanticChildCount,
+    this.listDragStartBehavior = DragStartBehavior.start,
+    this.listPhysics,
+    this.listPrimary,
+    this.fieldIconKey,
+    this.menuList,
   })  : assert(
           !(labelText == null && customTextField == null),
           'Either provide a [labelText] or a custom [customTextField].',
@@ -121,8 +134,14 @@ class OptimizedSearchField extends StatelessWidget {
   final FutureOr<Iterable<String>> Function(TextEditingValue)? optionsBuilder;
 
   /// Custom text field widget
-  final Widget Function({required Widget suffixIcon, required GlobalKey key})?
-      customTextField;
+  final Widget Function({
+    required GlobalKey key,
+    required Key? textFieldKey,
+    required Widget suffixIcon,
+    required TextEditingController controller,
+    required FocusNode focusNode,
+    required void Function(String)? onChanged,
+  })? customTextField;
 
   /// Style for the label text
   final TextStyle? labelTextStyle;
@@ -133,13 +152,35 @@ class OptimizedSearchField extends StatelessWidget {
   /// Initial value for the text field
   final TextEditingValue? initValue;
 
+  final Key? listKey;
+
+  final Key? listItemKey;
+
   /// Custom list item widget
   final Widget Function({
+    required Key? key,
     required String value,
     required bool isEnabled,
     required int index,
     required void Function() onPressed,
   })? listItem;
+
+  final double? listCacheExtent;
+  final bool listAddSemanticIndexes;
+  final ScrollController? listController;
+  final String? listRestorationId;
+  final int? listSemanticChildCount;
+  final DragStartBehavior listDragStartBehavior;
+  final ScrollPhysics? listPhysics;
+  final bool? listPrimary;
+
+  final Key? fieldIconKey;
+
+  /// Custom list widget
+  final Widget Function({
+    required int length,
+    required Widget Function(int index) item,
+  })? menuList;
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +191,7 @@ class OptimizedSearchField extends StatelessWidget {
       isRequired: isRequired,
       onChanged: onChanged,
       showErrorText: showErrorText,
-      items: (element) => Text(element, style: itemTextStyle),
+      item: (element) => Text(element, style: itemTextStyle),
       focusNode: focusNode,
       optionsBuilder: optionsBuilder ??
           (TextEditingValue textEditingValue) {
@@ -164,11 +205,9 @@ class OptimizedSearchField extends StatelessWidget {
                   ),
             );
           },
-      onSelectedItem: (String value) => value,
       onSelected: onChanged,
       textFieldKey: textFieldKey,
       description: description,
-      isLoading: dropDownList.isEmpty,
       menuMaxHeight: menuMaxHeight,
       menuDecoration: menuDecoration,
       listPadding: listPadding,
@@ -179,12 +218,25 @@ class OptimizedSearchField extends StatelessWidget {
       fieldActiveIcon: fieldActiveIcon,
       fieldInactiveIcon: fieldInactiveIcon,
       fieldSuffixIcon: fieldSuffixIcon,
-      usePrototype: true,
+      usePrototype: usePrototype,
       fieldInputFormatters: fieldInputFormatters,
       labelTextStyle: labelTextStyle,
       optionsViewOpenDirection: optionsViewOpenDirection,
       initValue: initValue,
-      listItem: listItem,
+      listButtonItem: listItem,
+      listKey: listKey,
+      listItemKey: listItemKey,
+      listCacheExtent: listCacheExtent,
+      listAddSemanticIndexes: listAddSemanticIndexes,
+      listController: listController,
+      listRestorationId: listRestorationId,
+      listSemanticChildCount: listSemanticChildCount,
+      listDragStartBehavior: listDragStartBehavior,
+      listPhysics: listPhysics,
+      listPrimary: listPrimary,
+      customTextField: customTextField,
+      fieldIconKey: fieldIconKey,
+      menuList: menuList,
     );
   }
 }

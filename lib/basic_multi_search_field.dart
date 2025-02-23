@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:optimized_search_field/optimized_search_field.dart';
@@ -9,16 +10,16 @@ part 'selected_chip.dart';
 /// A basic multi-select search field widget with customizable options.
 class BasicMultiSearchField<T extends Object> extends StatefulWidget {
   const BasicMultiSearchField({
-    required this.onChanged,
+    required this.onSelected,
     required this.labelText,
     required this.dropDownList,
     required this.values,
     required this.removeEvent,
-    required this.showErrorText,
-    required this.errorText,
     required this.item,
     required this.optionsBuilder,
     required this.getItemText,
+    this.errorText,
+    this.showErrorText,
     this.selectListSpacing = 8,
     this.selectListItemSpacing = 8,
     this.selectListItemRunSpacing = 8,
@@ -58,11 +59,25 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
     this.controller,
     this.labelTextStyle,
     this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
-    this.listItem,
+    this.listButtonItem,
+    this.listCacheExtent,
+    this.listAddSemanticIndexes = true,
+    this.listController,
+    this.listRestorationId,
+    this.listSemanticChildCount,
+    this.listDragStartBehavior = DragStartBehavior.start,
+    this.listPhysics,
+    this.listPrimary,
+    this.fieldIconKey,
+    this.menuList,
+    this.listKey,
+    this.listItemKey,
+    this.selectedListKey,
+    this.selectedListItemKey,
   }) : super(key: key);
 
   // Callback for text change
-  final void Function(String text)? onChanged;
+  final void Function(String text)? onSelected;
 
   // Label text for the search field
   final String labelText;
@@ -164,8 +179,14 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
   final bool usePrototype;
 
   // Custom text field widget
-  final Widget Function({required Widget suffixIcon, required GlobalKey key})?
-      customTextField;
+  final Widget Function({
+    required GlobalKey key,
+    required Key? textFieldKey,
+    required Widget suffixIcon,
+    required TextEditingController controller,
+    required FocusNode focusNode,
+    required void Function(String)? onChanged,
+  })? customTextField;
 
   // Widget for the selected item
   final Widget Function(T value)? selectedWidget;
@@ -206,11 +227,37 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
 
   // Custom list item widget
   final Widget Function({
+    required Key? key,
     required T value,
     required bool isEnabled,
     required int index,
     required void Function() onPressed,
-  })? listItem;
+  })? listButtonItem;
+
+  final double? listCacheExtent;
+  final bool listAddSemanticIndexes;
+  final ScrollController? listController;
+  final String? listRestorationId;
+  final int? listSemanticChildCount;
+  final DragStartBehavior listDragStartBehavior;
+  final ScrollPhysics? listPhysics;
+  final bool? listPrimary;
+
+  final Key? fieldIconKey;
+
+  /// Custom list widget
+  final Widget Function({
+    required int length,
+    required Widget Function(int index) item,
+  })? menuList;
+
+  final Key? listKey;
+
+  final Key? listItemKey;
+
+  final Key? selectedListKey;
+
+  final Key? selectedListItemKey;
 
   @override
   State<BasicMultiSearchField<T>> createState() =>
@@ -237,7 +284,7 @@ class _BasicMultiSearchFieldState<T extends Object>
 
   void _unFocusData() {
     if (!focusNode.hasFocus && controller.text.isNotEmpty) {
-      widget.onChanged?.call(controller.text);
+      widget.onSelected?.call(controller.text);
       controller.clear();
     }
   }
@@ -246,7 +293,7 @@ class _BasicMultiSearchFieldState<T extends Object>
     if (controller.text.trim().isNotEmpty &&
         keyEvent is KeyDownEvent &&
         keyEvent.logicalKey == LogicalKeyboardKey.enter) {
-      widget.onChanged?.call(controller.text);
+      widget.onSelected?.call(controller.text);
       focusNode.unfocus();
       controller.clear();
       return KeyEventResult.handled;
@@ -277,7 +324,7 @@ class _BasicMultiSearchFieldState<T extends Object>
           showErrorText: widget.showErrorText,
           optionsBuilder: widget.optionsBuilder,
           unfocusSuffixIcon: widget.unfocusSuffixIcon,
-          items: widget.item,
+          item: widget.item,
           errorMaxLines: widget.errorMaxLines,
           description: widget.description,
           unenabledList: widget.values == null ||
@@ -291,18 +338,17 @@ class _BasicMultiSearchFieldState<T extends Object>
                   )
                   .toList(),
           onSelected: (value) {
-            widget.onChanged?.call(getItemText(value));
+            widget.onSelected?.call(getItemText(value));
             controller.clear();
             focusNode.unfocus();
           },
           onFieldSubmitted: (value) {
             if (value.trim().isNotEmpty) {
-              widget.onChanged?.call(value);
+              widget.onSelected?.call(value);
               controller.clear();
               focusNode.unfocus();
             }
           },
-          isLoading: widget.dropDownList.isEmpty,
           menuMaxHeight: widget.menuMaxHeight,
           menuMargin: widget.menuMargin,
           menuDecoration: widget.menuDecoration,
@@ -319,10 +365,23 @@ class _BasicMultiSearchFieldState<T extends Object>
           fieldInputFormatters: widget.fieldInputFormatters,
           labelTextStyle: widget.labelTextStyle,
           optionsViewOpenDirection: widget.optionsViewOpenDirection,
-          listItem: widget.listItem,
+          listButtonItem: widget.listButtonItem,
+          listCacheExtent: widget.listCacheExtent,
+          listAddSemanticIndexes: widget.listAddSemanticIndexes,
+          listController: widget.listController,
+          listRestorationId: widget.listRestorationId,
+          listSemanticChildCount: widget.listSemanticChildCount,
+          listDragStartBehavior: widget.listDragStartBehavior,
+          listPhysics: widget.listPhysics,
+          listPrimary: widget.listPrimary,
+          fieldIconKey: widget.fieldIconKey,
+          menuList: widget.menuList,
+          listKey: widget.listKey,
+          listItemKey: widget.listItemKey,
         ),
         if (selectedValueIsNotEmpty)
           Wrap(
+            key: widget.selectedListKey,
             spacing: widget.selectListItemSpacing,
             runSpacing: widget.selectListItemRunSpacing,
             children: List.generate(
@@ -330,6 +389,7 @@ class _BasicMultiSearchFieldState<T extends Object>
               (index) =>
                   widget.selectedWidget?.call(getValue(index)) ??
                   _SelectedChipWidget(
+                    widgetKey: widget.selectedListItemKey,
                     labelText: getItemText(getValue(index)),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,

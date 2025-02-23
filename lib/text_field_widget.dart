@@ -1,10 +1,10 @@
-part of 'based_search_field.dart';
+part of 'basic_search_field.dart';
 
 class _TextFieldWidget extends StatelessWidget {
   const _TextFieldWidget({
     required this.onChanged,
     required this.labelText,
-    required this.onFieldSubmitted,
+    required this.onSubmitted,
     this.widgetKey,
     this.isRequired,
     Key? key,
@@ -65,7 +65,7 @@ class _TextFieldWidget extends StatelessWidget {
 
   final InputDecoration? decoration;
 
-  final void Function(String)? onFieldSubmitted;
+  final void Function(String)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class _TextFieldWidget extends StatelessWidget {
       controller: controller,
       style: textStyle,
       onChanged: onChanged,
-      onSubmitted: onFieldSubmitted,
+      onSubmitted: onSubmitted,
       decoration: decoration ??
           InputDecoration(
             labelText: getLabelText,
