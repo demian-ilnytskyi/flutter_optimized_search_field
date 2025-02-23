@@ -35,12 +35,12 @@ void main() {
           100000,
           (index) => 'item ${index + 1}',
         ),
-        itemStyle: const ButtonStyle(
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(),
+        itemStyle: ButtonStyle(
+          shape: MaterialStateProperty.all(
+            const RoundedRectangleBorder(),
           ),
-          padding: WidgetStatePropertyAll(
-            EdgeInsets.symmetric(vertical: 16),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(vertical: 16),
           ),
         ),
         optionsViewOpenDirection: OptionsViewOpenDirection.up,
@@ -135,12 +135,12 @@ void main() {
           100000,
           (index) => 'item ${index + 1}',
         ),
-        itemStyle: const ButtonStyle(
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(),
+        itemStyle: ButtonStyle(
+          shape: MaterialStateProperty.all(
+            const RoundedRectangleBorder(),
           ),
-          padding: WidgetStatePropertyAll(
-            EdgeInsets.symmetric(vertical: 16),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(vertical: 16),
           ),
         ),
         optionsViewOpenDirection: OptionsViewOpenDirection.up,

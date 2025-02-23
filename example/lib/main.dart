@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -65,11 +65,11 @@ class _HomePageState extends State<HomePage> {
                 100000,
                 (index) => 'item ${index + 1}',
               ),
-              itemStyle: const ButtonStyle(
-                shape: WidgetStatePropertyAll(
+              itemStyle: ButtonStyle(
+                shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                 ),
-                padding: WidgetStatePropertyAll(
+                padding: MaterialStateProperty.all(
                   EdgeInsets.symmetric(vertical: 16),
                 ),
               ),

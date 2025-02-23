@@ -58,7 +58,7 @@ class _SelectedChipWidget extends StatelessWidget {
       key: widgetKey,
       style: padding == null
           ? buttonStyle
-          : buttonStyle.copyWith(padding: WidgetStatePropertyAll(padding)),
+          : buttonStyle.copyWith(padding: MaterialStateProperty.all(padding)),
       clipBehavior: clipBehavior ?? Clip.hardEdge,
       onPressed: onPressed,
       child: Row(
@@ -83,13 +83,15 @@ class _SelectedChipWidget extends StatelessWidget {
       );
 }
 
-const defaultCancelChipButtonStyle = ButtonStyle(
-  padding: WidgetStatePropertyAll(
-    EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+final defaultCancelChipButtonStyle = ButtonStyle(
+  padding: MaterialStateProperty.all(
+    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
   ),
   alignment: Alignment.center,
-  backgroundColor: WidgetStatePropertyAll(Color(0xffc4fffc)),
-  shape: WidgetStatePropertyAll(
-    RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
+  backgroundColor: MaterialStateProperty.all(const Color(0xffc4fffc)),
+  shape: MaterialStateProperty.all(
+    const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(32)),
+    ),
   ),
 );
