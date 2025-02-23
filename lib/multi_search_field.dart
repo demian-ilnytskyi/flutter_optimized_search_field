@@ -21,7 +21,6 @@ class MultiSearchField extends StatelessWidget {
     this.listClipBehavior = Clip.hardEdge,
     this.fieldActiveIcon = const Icon(Icons.close),
     this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
-    this.usePrototype = true,
     this.textFieldKey,
     Key? key,
     this.showErrorText,
@@ -49,7 +48,6 @@ class MultiSearchField extends StatelessWidget {
     this.controller,
     this.focusNode,
     this.labelTextStyle,
-    this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
     this.listButtonItem,
     this.listCacheExtent,
     this.listAddSemanticIndexes = true,
@@ -143,9 +141,6 @@ class MultiSearchField extends StatelessWidget {
   /// Suffix icon for the search field
   final Widget? fieldSuffixIcon;
 
-  /// Whether to use the prototype
-  final bool usePrototype;
-
   /// Maximum number of lines for the selected item
   final int? selectedItemMaxLines;
 
@@ -198,9 +193,6 @@ class MultiSearchField extends StatelessWidget {
 
   /// Style for the label text
   final TextStyle? labelTextStyle;
-
-  /// Direction for the options view
-  final OptionsViewOpenDirection optionsViewOpenDirection;
 
   /// Custom list item widget
   final Widget Function({
@@ -281,7 +273,6 @@ class MultiSearchField extends StatelessWidget {
       fieldActiveIcon: fieldActiveIcon,
       fieldInactiveIcon: fieldInactiveIcon,
       fieldSuffixIcon: fieldSuffixIcon,
-      usePrototype: usePrototype,
       customTextField: customTextField,
       selectedItemMaxLines: selectedItemMaxLines,
       selectedItemStyle: selectedItemStyle,
@@ -296,7 +287,6 @@ class MultiSearchField extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       labelTextStyle: labelTextStyle,
-      optionsViewOpenDirection: optionsViewOpenDirection,
       listButtonItem: listButtonItem,
       listCacheExtent: listCacheExtent,
       listAddSemanticIndexes: listAddSemanticIndexes,

@@ -15,3 +15,5 @@ concurrency:
 jobs:
   build_tests:
     uses: DemienIlnutskiy/flutter_workflows/.github/workflows/ci_build_and_test.yml@main
+    with:
+      flutter_versions: "3.16.0, 2.0.0"

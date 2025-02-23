@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,10 +41,8 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     this.listButtonItem,
     this.fieldDecoration,
     this.useFindChildIndexCallback = true,
-    this.usePrototype = true,
     this.fieldInputFormatters,
     this.labelTextStyle,
-    this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
     this.initValue,
     this.onFieldSubmitted,
     this.listKey,
@@ -89,7 +84,7 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   final Widget Function(T element)? item;
 
   /// Options builder for the search field
-  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final Iterable<T> Function(TextEditingValue) optionsBuilder;
 
   /// Suffix icon when the field is unfocused
   final Icon? unfocusSuffixIcon;
@@ -172,9 +167,6 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   /// Whether to use the find child index callback
   final bool useFindChildIndexCallback;
 
-  /// Whether to use the prototype
-  final bool usePrototype;
-
   /// Input formatters for the search field
   final List<TextInputFormatter>? fieldInputFormatters;
 
@@ -191,9 +183,6 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
 
   /// Style for the label text
   final TextStyle? labelTextStyle;
-
-  /// Direction for the options view
-  final OptionsViewOpenDirection optionsViewOpenDirection;
 
   /// Initial value for the search field
   final TextEditingValue? initValue;
@@ -223,29 +212,17 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
 class _BasicSearchFieldState<T extends Object>
     extends State<BasicSearchField<T>> {
   late GlobalKey _anchorKey;
-  late GlobalKey _menuKey;
   late TextEditingController controller;
   late FocusNode focusNode;
   late bool showActiveIcon;
-  late double? menuHeight;
 
   @override
   void initState() {
     super.initState();
     _initializeController();
     showActiveIcon = false;
-    menuHeight = null;
 
     _anchorKey = GlobalKey();
-    _menuKey = GlobalKey();
-  }
-
-  @override
-  void didUpdateWidget(covariant BasicSearchField<T> oldWidget) {
-    if (widget.menuMaxHeight != oldWidget.menuMaxHeight) {
-      menuHeight = null;
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   void _initializeController() {
@@ -276,54 +253,6 @@ class _BasicSearchFieldState<T extends Object>
         showActiveIcon = focusNode.hasFocus;
       });
 
-  void setMenuHeight() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final context = _menuKey.currentContext;
-      if (context != null) {
-        final box = context.findRenderObject()! as RenderBox;
-        if (box.hasSize) {
-          setState(() {
-            menuHeight = box.size.height;
-          });
-        }
-      }
-    });
-  }
-
-  OptionsViewOpenDirection get optionsViewOpenDirection {
-    if (context.findRenderObject() == null) {
-      return widget.optionsViewOpenDirection;
-    }
-
-    final renderObject = context.findRenderObject();
-    // final screenHeight = MediaQuery.sizeOf(context).height;
-    // final availableHeight =
-    //     screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight);
-
-    if (menuHeight != null && renderObject != null) {
-      final renderBox = renderObject as RenderBox;
-      final screenHeight = MediaQuery.sizeOf(context).height;
-      final buttonPosition = renderBox.localToGlobal(Offset.zero);
-      final dy = buttonPosition.dy;
-      final availableHeight = screenHeight - (dy + getHeight);
-      final hasBottomSpace = availableHeight > menuHeight!;
-      final hasTopSpace = dy > menuHeight!;
-      switch (widget.optionsViewOpenDirection) {
-        case OptionsViewOpenDirection.down:
-          if (!hasBottomSpace) {
-            return OptionsViewOpenDirection.up;
-          }
-          break;
-        case OptionsViewOpenDirection.up:
-          if (!hasTopSpace) {
-            return OptionsViewOpenDirection.down;
-          }
-          break;
-      }
-    }
-    return widget.optionsViewOpenDirection;
-  }
-
   bool buttonEnabled(T option) {
     if (widget.unenabledList == null) {
       return false;
@@ -342,7 +271,6 @@ class _BasicSearchFieldState<T extends Object>
       optionsBuilder: widget.optionsBuilder,
       focusNode: focusNode,
       textEditingController: controller,
-      optionsViewOpenDirection: optionsViewOpenDirection,
       optionsViewBuilder: (context, onSelected, options) {
         Widget getItem(int index) {
           final option = options.elementAt(index);
@@ -387,11 +315,8 @@ class _BasicSearchFieldState<T extends Object>
         }
 
         final list = Align(
-          alignment: optionsViewOpenDirection == OptionsViewOpenDirection.down
-              ? Alignment.topLeft
-              : Alignment.bottomLeft,
+          alignment: Alignment.topLeft,
           child: ConstrainedBox(
-            key: _menuKey,
             constraints: BoxConstraints(
               maxHeight: widget.menuMaxHeight,
               maxWidth: getWidth,
@@ -418,30 +343,7 @@ class _BasicSearchFieldState<T extends Object>
                     dragStartBehavior: widget.listDragStartBehavior,
                     physics: widget.listPhysics,
                     primary: widget.listPrimary,
-                    prototypeItem: options.isNotEmpty ? getItem(0) : null,
-                    findChildIndexCallback: widget.useFindChildIndexCallback
-                        ? (key) {
-                            if (key is ValueKey<T>) {
-                              try {
-                                final index =
-                                    options.toList().indexOf(key.value);
-                                if (index > 0) {
-                                  return index;
-                                }
-                              } catch (e, stack) {
-                                // coverage:ignore-start
-                                log(
-                                  'OptimizedSearchField: '
-                                  'Error in findChildIndexCallback: ',
-                                  error: e,
-                                  stackTrace: stack,
-                                );
-                                // coverage:ignore-end
-                              }
-                            }
-                            return null;
-                          }
-                        : null,
+                    // prototypeItem: options.isNotEmpty ? getItem(0) : null,
                     itemBuilder: (context, index) => getItem(index),
                     itemCount: options.length,
                   ),
@@ -449,12 +351,7 @@ class _BasicSearchFieldState<T extends Object>
           ),
         );
 
-        if (menuHeight == null) {
-          setMenuHeight();
-          return Opacity(opacity: 0, child: list);
-        } else {
-          return list;
-        }
+        return list;
       },
       onSelected: widget.onSelected,
       displayStringForOption: widget.displayStringForOption ??

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,11 +31,9 @@ class OptimizedSearchField extends StatelessWidget {
     this.customTextField,
     this.fieldDecoration,
     this.fieldSuffixIcon,
-    this.usePrototype = true,
     this.fieldInputFormatters,
     this.optionsBuilder,
     this.labelTextStyle,
-    this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
     this.initValue,
     this.listItem,
     this.listKey,
@@ -124,14 +120,11 @@ class OptimizedSearchField extends StatelessWidget {
   /// Suffix icon for the search field
   final Widget? fieldSuffixIcon;
 
-  /// Whether to use the prototype
-  final bool usePrototype;
-
   /// Input formatters for the search field
   final List<TextInputFormatter>? fieldInputFormatters;
 
   /// Options builder for the search field
-  final FutureOr<Iterable<String>> Function(TextEditingValue)? optionsBuilder;
+  final Iterable<String> Function(TextEditingValue)? optionsBuilder;
 
   /// Custom text field widget
   final Widget Function({
@@ -146,9 +139,6 @@ class OptimizedSearchField extends StatelessWidget {
 
   /// Style for the label text
   final TextStyle? labelTextStyle;
-
-  /// Direction for the options view
-  final OptionsViewOpenDirection optionsViewOpenDirection;
 
   /// Initial value for the text field
   final TextEditingValue? initValue;
@@ -219,10 +209,8 @@ class OptimizedSearchField extends StatelessWidget {
       fieldActiveIcon: fieldActiveIcon,
       fieldInactiveIcon: fieldInactiveIcon,
       fieldSuffixIcon: fieldSuffixIcon,
-      usePrototype: usePrototype,
       fieldInputFormatters: fieldInputFormatters,
       labelTextStyle: labelTextStyle,
-      optionsViewOpenDirection: optionsViewOpenDirection,
       initValue: initValue,
       listButtonItem: listItem,
       listKey: listKey,

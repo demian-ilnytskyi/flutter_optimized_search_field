@@ -14,15 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Optimized Search Field Example',
       theme: ThemeData(
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            mouseCursor: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.disabled)) {
-                return SystemMouseCursors.forbidden;
-              }
-              return SystemMouseCursors.click;
-            }),
-          ),
+        textButtonTheme: const TextButtonThemeData(
+          style: ButtonStyle(),
         ),
       ),
       home: const HomePage(),
@@ -54,8 +47,9 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
           children: [
-            Text('You Entered: $currentItem', style: TextStyle(fontSize: 24)),
-            SizedBox(height: 200),
+            Text('You Entered: $currentItem',
+                style: const TextStyle(fontSize: 24)),
+            const SizedBox(height: 200),
             OptimizedSearchField(
               onChanged: (text) => setState(() {
                 currentItem = text;
@@ -67,16 +61,15 @@ class _HomePageState extends State<HomePage> {
               ),
               itemStyle: ButtonStyle(
                 shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                  const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                 ),
                 padding: MaterialStateProperty.all(
-                  EdgeInsets.symmetric(vertical: 16),
+                  const EdgeInsets.symmetric(vertical: 16),
                 ),
               ),
               menuMaxHeight: 200,
-              optionsViewOpenDirection: OptionsViewOpenDirection.up,
             ),
-            SizedBox(height: 200),
+            const SizedBox(height: 200),
             MultiSearchField(
               labelText: 'Enter Items',
               dropDownList: List.generate(
@@ -91,16 +84,8 @@ class _HomePageState extends State<HomePage> {
                 currentItems.add(text);
               }),
               menuMaxHeight: 400,
-              selectedItemStyle: ButtonStyle(
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                ),
-              ),
             ),
-            SizedBox(height: 800),
+            const SizedBox(height: 800),
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:optimized_search_field/optimized_search_field.dart';
 
@@ -110,26 +109,6 @@ void main() {
     expect(find.byKey(listdItemsKey), findsNothing);
 
     expect(textValues.value.length, 1);
-
-    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-
-    await tester.pumpAndSettle();
-
-    expect(textValues.value.length, 2);
-
-    expect(find.byKey(selectedListKey), findsOneWidget);
-
-    expect(find.byKey(selectedListdItemsKey), findsWidgets);
-
-    await tester.tap(find.byKey(selectedListdItemsKey).first);
-
-    await tester.pumpAndSettle();
-
-    expect(textValues.value.length, 1);
-
-    expect(find.byKey(selectedListKey), findsOneWidget);
-
-    expect(find.byKey(selectedListdItemsKey), findsOneWidget);
 
     await tester.tap(find.byKey(selectedListdItemsKey));
 

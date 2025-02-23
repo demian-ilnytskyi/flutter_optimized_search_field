@@ -24,12 +24,6 @@ Below are some previews demonstrating the key features of the package:
 </p>
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/adavptive_menu_position.gif">
-    <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
-  </a>
-</p>
-
-<p align="center">
   <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart">
    Multi Search
   </a>
@@ -41,20 +35,6 @@ Below are some previews demonstrating the key features of the package:
   </a>
 </p>
 
-
-<p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/basic_search_field.dart">
-   Adaptive Menu Position
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/adavptive_menu_position.gif">
-    <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
-  </a>
-</p>
-
-  * This gif shows that if there isn’t enough space above the widget, the menu will adapt and display from the bottom—even if the top position is selected. First has position up and second has down*
 
 1. **OptimizedSearchField**  
    A search field specifically designed for text-basic searches. It is highly optimized for large lists, offering excellent performance with minimal configuration. While not highly customizable, it’s perfect for quick implementations.
@@ -119,7 +99,6 @@ OptimizedSearchField(
     ),
   ),
   menuMaxHeight: 200,
-  optionsViewOpenDirection: OptionsViewOpenDirection.up,
 )
 ```
 
@@ -277,7 +256,6 @@ BasicMultiSearchField<MyModel>(
 - `onFieldSubmitted`: Callback for field submission.
 - `onSelected`: Callback for item selection.
 - `optionsBuilder`: Function to build the options for the dropdown.
-- `optionsViewOpenDirection`: Direction for the options view.
 - `removeEvent`: Callback for removing an item.
 - `selectedItemClipBehavior`: Clip behavior for the selected item.
 - `selectedItemIcon`: Icon for the selected item.

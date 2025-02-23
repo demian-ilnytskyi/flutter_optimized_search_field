@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +27,6 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
     this.listClipBehavior = Clip.hardEdge,
     this.fieldActiveIcon = const Icon(Icons.close),
     this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
-    this.usePrototype = true,
     this.textFieldKey,
     this.isRequired,
     Key? key,
@@ -58,7 +55,6 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
     this.fieldInputFormatters,
     this.controller,
     this.labelTextStyle,
-    this.optionsViewOpenDirection = OptionsViewOpenDirection.down,
     this.listButtonItem,
     this.listCacheExtent,
     this.listAddSemanticIndexes = true,
@@ -107,7 +103,7 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
   final Widget Function(T element) item;
 
   // Function to build the options for the dropdown
-  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final Iterable<T> Function(TextEditingValue) optionsBuilder;
 
   // Suffix icon for the search field when unfocused
   final Icon? unfocusSuffixIcon;
@@ -175,9 +171,6 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
   // Suffix icon for the search field
   final Widget? fieldSuffixIcon;
 
-  // Whether to use the prototype
-  final bool usePrototype;
-
   // Custom text field widget
   final Widget Function({
     required GlobalKey key,
@@ -223,8 +216,6 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
   final TextEditingController? controller;
 
   final TextStyle? labelTextStyle;
-
-  final OptionsViewOpenDirection optionsViewOpenDirection;
 
   // Custom list item widget
   final Widget Function({
@@ -278,9 +269,7 @@ class _BasicMultiSearchFieldState<T extends Object>
 
   void _initializeController() {
     controller = widget.controller ?? TextEditingController();
-    focusNode = (widget.focusNode ?? FocusNode())
-      ..onKeyEvent = _handleKeyEvent
-      ..addListener(_unFocusData);
+    focusNode = (widget.focusNode ?? FocusNode())..addListener(_unFocusData);
   }
 
   void _unFocusData() {
@@ -288,18 +277,6 @@ class _BasicMultiSearchFieldState<T extends Object>
       widget.onSelected?.call(controller.text);
       controller.clear();
     }
-  }
-
-  KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent keyEvent) {
-    if (controller.text.trim().isNotEmpty &&
-        keyEvent is KeyDownEvent &&
-        keyEvent.logicalKey == LogicalKeyboardKey.enter) {
-      widget.onSelected?.call(controller.text);
-      focusNode.unfocus();
-      controller.clear();
-      return KeyEventResult.handled;
-    }
-    return KeyEventResult.ignored;
   }
 
   bool get selectedValueIsNotEmpty {
@@ -360,11 +337,9 @@ class _BasicMultiSearchFieldState<T extends Object>
           fieldActiveIcon: widget.fieldActiveIcon,
           fieldInactiveIcon: widget.fieldInactiveIcon,
           fieldSuffixIcon: widget.fieldSuffixIcon,
-          usePrototype: widget.usePrototype,
           customTextField: widget.customTextField,
           fieldInputFormatters: widget.fieldInputFormatters,
           labelTextStyle: widget.labelTextStyle,
-          optionsViewOpenDirection: widget.optionsViewOpenDirection,
           listButtonItem: widget.listButtonItem,
           listCacheExtent: widget.listCacheExtent,
           listAddSemanticIndexes: widget.listAddSemanticIndexes,
