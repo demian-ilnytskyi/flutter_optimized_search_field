@@ -12,17 +12,6 @@
 
 A Flutter package that provides optimized search fields with various customization options. This package offers four distinct widgets designed to cover different search needs:
 
-1. **OptimizedSearchField**  
-   A search field specifically designed for text-basic searches. It is highly optimized for large lists, offering excellent performance with minimal configuration. While not highly customizable, it’s perfect for quick implementations.
-
-2. **BasicSearchField**  
-   A more customizable version of OptimizedSearchField. It retains all its performance benefits and extends functionality by supporting model-basic data. Each search result can include descriptions, images, or other elements, though it requires more parameters for setup.
-
-3. **MultiSearchField**  
-   A specialized search field designed for array-basic searches. Unlike traditional text search fields that update in real time, MultiSearchField only triggers a search after the user presses enter—adding the item to the selected items.
-
-4. **BasicMultiSearchField**  
-   A highly customizable version of MultiSearchField. It includes all the benefits of MultiSearchField and supports complex data types (models), where each search result can contain rich content like descriptions or images. This version requires additional parameters, trading ease of use for flexibility.
 
 ## Preview
 
@@ -66,6 +55,18 @@ Below are some previews demonstrating the key features of the package:
 </p>
 
   * This gif shows that if there isn’t enough space above the widget, the menu will adapt and display from the bottom—even if the top position is selected. First has position up and second has down*
+
+1. **OptimizedSearchField**  
+   A search field specifically designed for text-basic searches. It is highly optimized for large lists, offering excellent performance with minimal configuration. While not highly customizable, it’s perfect for quick implementations.
+
+2. **BasicSearchField**  
+   A more customizable version of OptimizedSearchField. It retains all its performance benefits and extends functionality by supporting model-basic data. Each search result can include descriptions, images, or other elements, though it requires more parameters for setup.
+
+3. **MultiSearchField**  
+   A specialized search field designed for array-basic searches. Unlike traditional text search fields that update in real time, MultiSearchField only triggers a search after the user presses enter—adding the item to the selected items.
+
+4. **BasicMultiSearchField**  
+   A highly customizable version of MultiSearchField. It includes all the benefits of MultiSearchField and supports complex data types (models), where each search result can contain rich content like descriptions or images. This version requires additional parameters, trading ease of use for flexibility.
 
 ## Features
 
