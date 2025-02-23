@@ -48,11 +48,7 @@ class OptimizedSearchField extends StatelessWidget {
     this.listPrimary,
     this.fieldIconKey,
     this.menuList,
-  })  : assert(
-          !(labelText == null && customTextField == null),
-          'Either provide a [labelText] or a custom [customTextField].',
-        ),
-        super(key: key);
+  }) : super(key: key);
 
   /// Callback for text change
   final void Function(String text)? onChanged;

@@ -56,11 +56,7 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     this.listPhysics,
     this.listPrimary,
     this.fieldIconKey,
-  })  : assert(
-          !(item == null && listButtonItem == null),
-          'Either provide a [listItem] or a custom [listButtonItem].',
-        ),
-        super(key: key);
+  }) : super(key: key);
 
   /// Callback for text change
   final void Function(String text)? onChanged;
@@ -238,15 +234,6 @@ class _BasicSearchFieldState<T extends Object>
       return box.hasSize ? box.size.width : double.infinity;
     }
     return double.infinity;
-  }
-
-  double get getHeight {
-    final context = _anchorKey.currentContext;
-    if (context != null) {
-      final box = context.findRenderObject()! as RenderBox;
-      return box.hasSize ? box.size.height : 0;
-    }
-    return 0;
   }
 
   void _changeIcon() => setState(() {
