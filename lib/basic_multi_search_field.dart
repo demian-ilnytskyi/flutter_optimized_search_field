@@ -311,7 +311,6 @@ class _BasicMultiSearchFieldState<T extends Object>
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: widget.selectListSpacing,
       children: [
         BasicSearchField<T>(
           isRequired: widget.isRequired,
@@ -378,6 +377,9 @@ class _BasicMultiSearchFieldState<T extends Object>
           menuList: widget.menuList,
           listKey: widget.listKey,
           listItemKey: widget.listItemKey,
+        ),
+        SizedBox(
+          height: widget.selectListSpacing,
         ),
         if (selectedValueIsNotEmpty)
           Wrap(
