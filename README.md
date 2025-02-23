@@ -82,10 +82,10 @@ OptimizedSearchField(
     (index) => 'item ${index + 1}',
   ),
   itemStyle: const ButtonStyle(
-    shape: WidgetStatePropertyAll(
+    shape: MaterialStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
-    padding: WidgetStatePropertyAll(
+    padding: MaterialStateProperty.all(
       EdgeInsets.symmetric(vertical: 16),
     ),
   ),
