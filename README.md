@@ -1,5 +1,15 @@
 # Flutter Optimized Search Field
 
+<p align="center">
+  <a href="https://pub.dev/packages/optimized_search_field"><img src="https://img.shields.io/pub/v/optimized_search_field" alt="pub"></a>
+  <a href="https://app.codecov.io/github/DemienIlnutskiy/flutter_optimized_search_field"><img src="https://img.shields.io/codecov/c/github/DemienIlnutskiy/flutter_optimized_search_field" alt="pub"></a>
+  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/actions/workflows/generate_code_coverate.yaml"><img src="https://img.shields.io/github/actions/workflow/status/DemienIlnutskiy/flutter_optimized_search_field/generate_code_coverate.yaml?event=push&branch=main&label=tests&logo=github" alt="tests"></a>
+  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/actions/workflows/ci.yaml">
+    <img src="https://img.shields.io/github/actions/workflow/status/DemienIlnutskiy/flutter_optimized_search_field/ci.yaml?event=pull_request&label=Code%20Analysis%20%26%20Formatting&logo=github" 
+        alt="Code Analysis & Formatting">
+  </a>
+</p>
+
 A Flutter package that provides optimized search fields with various customization options. This package offers four distinct widgets designed to cover different search needs:
 
 1. **OptimizedSearchField**  
@@ -18,7 +28,11 @@ A Flutter package that provides optimized search fields with various customizati
 
 Below are some previews demonstrating the key features of the package:
 
-### [Search Field](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart)
+<p align="center">
+  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart">
+   Search Field
+  </a>
+</p>
 
 <p align="center">
   <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/adavptive_menu_position.gif">
@@ -26,7 +40,11 @@ Below are some previews demonstrating the key features of the package:
   </a>
 </p>
 
-### [Multi Search](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart)
+<p align="center">
+  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart">
+   Multi Search
+  </a>
+</p>
 
 <p align="center">
   <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/multi_search_field_preview.gif">
@@ -34,7 +52,12 @@ Below are some previews demonstrating the key features of the package:
   </a>
 </p>
 
-### [Adaptive Menu Position](https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/basic_search_field.dart)
+
+<p align="center">
+  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/basic_search_field.dart">
+   Adaptive Menu Position
+  </a>
+</p>
 
 <p align="center">
   <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/adavptive_menu_position.gif">
@@ -68,6 +91,11 @@ A search field created for text searches. It is highly optimized for large lists
 
 **Cons:**  
 - Limited customization options
+
+
+## Test Coverage and Flutter Version Support
+
+This package has 100% test coverage, ensuring reliability and robustness. The tests have been executed on Flutter versions 3.16.0 and 3.29.0, confirming full support for these versions and all versions in between.
 
 **Example Usage:**
 
