@@ -16,3 +16,7 @@
 - Updated ReadMe
 ## 1.0.0+3
 - Updated Changelog
+## 1.0.1
+- Support Flutter version >=2.0.0 <3.16.0
+## 2.0.0
+- Support Flutter version >=3.16.0 <4.0.0

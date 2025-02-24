@@ -1,4 +1,4 @@
-part of 'basic_search_field.dart';
+part of 'base_search_field.dart';
 
 class _TextFieldWidget extends StatelessWidget {
   const _TextFieldWidget({
@@ -7,7 +7,7 @@ class _TextFieldWidget extends StatelessWidget {
     required this.onSubmitted,
     this.widgetKey,
     this.isRequired,
-    Key? key,
+    super.key,
     this.errorText,
     this.controller,
     this.suffixIcon,
@@ -19,7 +19,7 @@ class _TextFieldWidget extends StatelessWidget {
     this.description,
     this.inputFormatters,
     this.decoration,
-  }) : super(key: key);
+  });
 
   // Widget key
   final Key? widgetKey;

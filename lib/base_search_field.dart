@@ -7,14 +7,15 @@ import 'package:flutter/services.dart';
 
 part 'text_field_widget.dart';
 
-/// A basic search field widget with customizable options.
-class BasicSearchField<T extends Object> extends StatefulWidget {
-  const BasicSearchField({
+/// A base search field widget with customizable options.
+class BaseSearchField<T extends Object> extends StatefulWidget {
+  const BaseSearchField({
     required this.labelText,
     required this.optionsBuilder,
     required this.item,
     required this.onChanged,
     required this.onSelected,
+    required this.getItemText,
     this.itemStyle,
     this.unenabledList = const [],
     this.menuMaxHeight = 400,
@@ -28,7 +29,7 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     this.textFieldKey,
     this.isRequired,
     this.displayStringForOption,
-    Key? key,
+    super.key,
     this.showErrorText,
     this.errorText,
     this.controller,
@@ -61,11 +62,10 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
     this.listPhysics,
     this.listPrimary,
     this.fieldIconKey,
-  })  : assert(
+  }) : assert(
           !(item == null && listButtonItem == null),
           'Either provide a [listItem] or a custom [listButtonItem].',
-        ),
-        super(key: key);
+        );
 
   /// Callback for text change
   final void Function(String text)? onChanged;
@@ -216,12 +216,15 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   final ScrollPhysics? listPhysics;
   final bool? listPrimary;
 
+  // Function to get the text for an item
+  final String Function(T value)? getItemText;
+
   @override
-  State<BasicSearchField<T>> createState() => _BasicSearchFieldState();
+  State<BaseSearchField<T>> createState() => _BaseSearchFieldState();
 }
 
-class _BasicSearchFieldState<T extends Object>
-    extends State<BasicSearchField<T>> {
+class _BaseSearchFieldState<T extends Object>
+    extends State<BaseSearchField<T>> {
   late GlobalKey _anchorKey;
   late GlobalKey _menuKey;
   late TextEditingController controller;
@@ -241,7 +244,7 @@ class _BasicSearchFieldState<T extends Object>
   }
 
   @override
-  void didUpdateWidget(covariant BasicSearchField<T> oldWidget) {
+  void didUpdateWidget(covariant BaseSearchField<T> oldWidget) {
     if (widget.menuMaxHeight != oldWidget.menuMaxHeight) {
       menuHeight = null;
     }
@@ -352,7 +355,8 @@ class _BasicSearchFieldState<T extends Object>
               onSelected(option);
             } else {
               widget.onSelected?.call(option);
-              controller.text = option.toString();
+              controller.text =
+                  widget.getItemText?.call(option) ?? option.toString();
               focusNode.unfocus();
             }
           }

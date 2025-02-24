@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -54,8 +54,9 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
           children: [
-            Text('You Entered: $currentItem', style: TextStyle(fontSize: 24)),
-            SizedBox(height: 200),
+            Text('You Entered: $currentItem',
+                style: const TextStyle(fontSize: 24)),
+            const SizedBox(height: 200),
             OptimizedSearchField(
               onChanged: (text) => setState(() {
                 currentItem = text;
@@ -67,16 +68,16 @@ class _HomePageState extends State<HomePage> {
               ),
               itemStyle: ButtonStyle(
                 shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                  const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                 ),
                 padding: MaterialStateProperty.all(
-                  EdgeInsets.symmetric(vertical: 16),
+                  const EdgeInsets.symmetric(vertical: 16),
                 ),
               ),
               menuMaxHeight: 200,
               optionsViewOpenDirection: OptionsViewOpenDirection.up,
             ),
-            SizedBox(height: 200),
+            const SizedBox(height: 200),
             MultiSearchField(
               labelText: 'Enter Items',
               dropDownList: List.generate(
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            SizedBox(height: 800),
+            const SizedBox(height: 800),
           ],
         ),
       ),
