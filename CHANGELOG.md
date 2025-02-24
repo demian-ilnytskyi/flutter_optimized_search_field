@@ -20,3 +20,5 @@
 - Support Flutter version >=2.0.0 <3.16.0
 ## 2.0.0
 - Support Flutter version >=3.16.0 <4.0.0
+## 2.0.0+1
+- Updated ReadMe

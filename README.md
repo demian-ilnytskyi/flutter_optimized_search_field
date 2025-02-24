@@ -26,8 +26,8 @@ Below are some previews demonstrating the key features of the package:
 </p>
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/adavptive_menu_position.gif">
-    <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
+  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/saerch_field_preview.gif">
+    <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/saerch_field_preview.gif">
   </a>
 </p>
 
