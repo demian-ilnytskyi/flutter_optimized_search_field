@@ -4,7 +4,7 @@ version: 2.0.0+2
 homepage: https://github.com/DemienIlnutskiy/flutter_optimized_search_field
 
 environment:
-  sdk: '>=3.19.0 <4.0.0'
+  sdk: '>=3.18.0 <4.0.0'
   flutter: ">=3.16.0"
 
 dependencies:

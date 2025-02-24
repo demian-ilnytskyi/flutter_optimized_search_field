@@ -22,5 +22,3 @@
 - Support Flutter version >=3.16.0 <4.0.0
 ## 2.0.0+1
 - Updated ReadMe
-## 2.0.0+2
-- Change Dart Min Sdk Version
