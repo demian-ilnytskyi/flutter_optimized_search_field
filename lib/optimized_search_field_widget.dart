@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:optimized_search_field/basic_search_field.dart';
+import 'package:optimized_search_field/base_search_field.dart';
 
 /// A widget that provides an optimized search field with dropdown options.
 class OptimizedSearchField extends StatelessWidget {
@@ -21,7 +21,7 @@ class OptimizedSearchField extends StatelessWidget {
     this.listClipBehavior = Clip.hardEdge,
     this.fieldActiveIcon = const Icon(Icons.close),
     this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
-    Key? key,
+    super.key,
     this.itemTextStyle,
     this.textFieldKey,
     this.showErrorText,
@@ -52,7 +52,7 @@ class OptimizedSearchField extends StatelessWidget {
     this.listPrimary,
     this.fieldIconKey,
     this.menuList,
-  }) : super(key: key);
+  });
 
   /// Callback for text change
   final void Function(String text)? onChanged;
@@ -181,13 +181,14 @@ class OptimizedSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasicSearchField<String>(
+    return BaseSearchField<String>(
       labelText: labelText,
       controller: controller,
       errorText: errorText,
       isRequired: isRequired,
       onChanged: onChanged,
       showErrorText: showErrorText,
+      getItemText: (value) => value,
       item: (element) => Text(element, style: itemTextStyle),
       focusNode: focusNode,
       optionsBuilder: optionsBuilder ??

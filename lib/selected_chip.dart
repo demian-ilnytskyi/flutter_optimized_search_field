@@ -1,10 +1,9 @@
-part of 'basic_multi_search_field.dart';
+part of 'base_multi_search_field.dart';
 
 class _SelectedChipWidget extends StatelessWidget {
   const _SelectedChipWidget({
     required this.labelText,
     required this.onPressed,
-    Key? key,
     this.style,
     this.textStyle,
     this.maxLines = 2,
@@ -14,7 +13,7 @@ class _SelectedChipWidget extends StatelessWidget {
     this.icon = const Icon(Icons.close),
     this.spacing = 8,
     this.widgetKey,
-  }) : super(key: key);
+  });
 
   final Key? widgetKey;
 

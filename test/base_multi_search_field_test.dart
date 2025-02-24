@@ -30,7 +30,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('Basic Search Field', (tester) async {
+  testWidgets('Base Search Field', (tester) async {
     final textValues = ValueNotifier<List<String>>([]);
     await initTest(
       tester: tester,
@@ -42,7 +42,7 @@ void main() {
           ValueListenableBuilder<List<String>>(
             valueListenable: textValues,
             builder: (BuildContext context, List<String> list, child) {
-              return BasicMultiSearchField<String>(
+              return BaseMultiSearchField<String>(
                 onSelected: (text) => textValues.value = List.from(
                   textValues.value,
                 )..add(text),
@@ -50,7 +50,7 @@ void main() {
                   textValues.value,
                 )..remove(value),
                 labelText: 'Enter Item',
-                item: (value) => Text(value),
+                item: Text.new,
                 dropDownList: values,
                 values: list,
                 showErrorText: true,
