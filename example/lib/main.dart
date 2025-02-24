@@ -89,12 +89,6 @@ class _HomePageState extends State<HomePage> {
                 currentItems.add(text);
               }),
               menuMaxHeight: 400,
-              selectedItemStyle: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-              ),
             ),
             const SizedBox(height: 800),
           ],
