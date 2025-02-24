@@ -79,7 +79,7 @@ class _SelectedChipWidget extends StatelessWidget {
 }
 
 final defaultCancelChipButtonStyle = ButtonStyle(
-  padding: MaterialStateProperty.all(
+  padding: WidgetStateProperty.all(
     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
   ),
   alignment: Alignment.center,
