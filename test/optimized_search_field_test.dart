@@ -35,13 +35,9 @@ void main() {
           100000,
           (index) => 'item ${index + 1}',
         ),
-        itemStyle: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            const RoundedRectangleBorder(),
-          ),
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.symmetric(vertical: 16),
-          ),
+        itemStyle: TextButton.styleFrom(
+          shape: const RoundedRectangleBorder(),
+          padding: const EdgeInsets.symmetric(vertical: 16),
         ),
         optionsViewOpenDirection: OptionsViewOpenDirection.up,
         listKey: listdKey,
@@ -135,13 +131,9 @@ void main() {
           100000,
           (index) => 'item ${index + 1}',
         ),
-        itemStyle: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            const RoundedRectangleBorder(),
-          ),
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.symmetric(vertical: 16),
-          ),
+        itemStyle: TextButton.styleFrom(
+          shape: const RoundedRectangleBorder(),
+          padding: const EdgeInsets.symmetric(vertical: 16),
         ),
         optionsViewOpenDirection: OptionsViewOpenDirection.up,
         listKey: listdKey,

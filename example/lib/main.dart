@@ -11,21 +11,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Optimized Search Field Example',
-      theme: ThemeData(
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            mouseCursor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.disabled)) {
-                return SystemMouseCursors.forbidden;
-              }
-              return SystemMouseCursors.click;
-            }),
-          ),
-        ),
-      ),
-      home: const HomePage(),
+      // theme: ThemeData(
+      //   textButtonTheme: TextButtonThemeData(
+      //     style: ButtonStyle(
+      //       mouseCursor: MaterialStateProperty.resolveWith((states) {
+      //         if (states.contains(MaterialState.disabled)) {
+      //           return SystemMouseCursors.forbidden;
+      //         }
+      //         return SystemMouseCursors.click;
+      //       }),
+      //     ),
+      //   ),
+      // ),
+      home: HomePage(),
     );
   }
 }
@@ -66,13 +66,10 @@ class _HomePageState extends State<HomePage> {
                 100000,
                 (index) => 'item ${index + 1}',
               ),
-              itemStyle: ButtonStyle(
-                shape: MaterialStateProperty.all(
-                  const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                ),
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 16),
-                ),
+              itemStyle: TextButton.styleFrom(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero),
+                padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               menuMaxHeight: 200,
               optionsViewOpenDirection: OptionsViewOpenDirection.up,
@@ -92,12 +89,10 @@ class _HomePageState extends State<HomePage> {
                 currentItems.add(text);
               }),
               menuMaxHeight: 400,
-              selectedItemStyle: ButtonStyle(
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
+              selectedItemStyle: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
                 ),
               ),
             ),

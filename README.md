@@ -112,13 +112,9 @@ OptimizedSearchField(
     100000,
     (index) => 'item ${index + 1}',
   ),
-  itemStyle: const ButtonStyle(
-    shape: MaterialStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    ),
-    padding: MaterialStateProperty.all(
-      EdgeInsets.symmetric(vertical: 16),
-    ),
+  itemStyle: const TextButton.styleFrom(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    padding: EdgeInsets.symmetric(vertical: 16),
   ),
   menuMaxHeight: 200,
   optionsViewOpenDirection: OptionsViewOpenDirection.up,
