@@ -12,7 +12,8 @@
 
 A Flutter package that provides optimized search fields with various customization options. This package offers four distinct widgets designed to cover different search needs:
 
-* Version 0.5.0 support flutter version 2.0.0 - 3.16.0 all another versions 3.16.0 and later
+* Version >=1.0.1 <2.0.0 support flutter versions 2.0.0 - 3.16.0 
+* \>=2.0.0 versions support flutter versions 3.16.0 and later
 
 ## Preview
 
