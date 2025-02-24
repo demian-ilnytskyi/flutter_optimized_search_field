@@ -4,14 +4,15 @@ import 'package:flutter/services.dart';
 
 part 'text_field_widget.dart';
 
-/// A basic search field widget with customizable options.
-class BasicSearchField<T extends Object> extends StatefulWidget {
-  const BasicSearchField({
+/// A base search field widget with customizable options.
+class BaseSearchField<T extends Object> extends StatefulWidget {
+  const BaseSearchField({
     required this.labelText,
     required this.optionsBuilder,
     required this.item,
     required this.onChanged,
     required this.onSelected,
+    required this.getItemText,
     this.itemStyle,
     this.unenabledList = const [],
     this.menuMaxHeight = 400,
@@ -201,12 +202,15 @@ class BasicSearchField<T extends Object> extends StatefulWidget {
   final ScrollPhysics? listPhysics;
   final bool? listPrimary;
 
+  // Function to get the text for an item
+  final String Function(T value)? getItemText;
+
   @override
-  State<BasicSearchField<T>> createState() => _BasicSearchFieldState();
+  State<BaseSearchField<T>> createState() => _BaseSearchFieldState();
 }
 
-class _BasicSearchFieldState<T extends Object>
-    extends State<BasicSearchField<T>> {
+class _BaseSearchFieldState<T extends Object>
+    extends State<BaseSearchField<T>> {
   late GlobalKey _anchorKey;
   late TextEditingController controller;
   late FocusNode focusNode;
@@ -267,7 +271,8 @@ class _BasicSearchFieldState<T extends Object>
               onSelected(option);
             } else {
               widget.onSelected?.call(option);
-              controller.text = option.toString();
+              controller.text =
+                  widget.getItemText?.call(option) ?? option.toString();
               focusNode.unfocus();
             }
           }

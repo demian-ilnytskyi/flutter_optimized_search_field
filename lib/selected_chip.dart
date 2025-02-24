@@ -1,4 +1,4 @@
-part of 'basic_multi_search_field.dart';
+part of 'base_multi_search_field.dart';
 
 class _SelectedChipWidget extends StatelessWidget {
   const _SelectedChipWidget({

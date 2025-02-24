@@ -37,15 +37,15 @@ Below are some previews demonstrating the key features of the package:
 
 
 1. **OptimizedSearchField**  
-   A search field specifically designed for text-basic searches. It is highly optimized for large lists, offering excellent performance with minimal configuration. While not highly customizable, it’s perfect for quick implementations.
+   A search field specifically designed for text-base searches. It is highly optimized for large lists, offering excellent performance with minimal configuration. While not highly customizable, it’s perfect for quick implementations.
 
-2. **BasicSearchField**  
-   A more customizable version of OptimizedSearchField. It retains all its performance benefits and extends functionality by supporting model-basic data. Each search result can include descriptions, images, or other elements, though it requires more parameters for setup.
+2. **BaseSearchField**  
+   A more customizable version of OptimizedSearchField. It retains all its performance benefits and extends functionality by supporting model-base data. Each search result can include descriptions, images, or other elements, though it requires more parameters for setup.
 
 3. **MultiSearchField**  
-   A specialized search field designed for array-basic searches. Unlike traditional text search fields that update in real time, MultiSearchField only triggers a search after the user presses enter—adding the item to the selected items.
+   A specialized search field designed for array-base searches. Unlike traditional text search fields that update in real time, MultiSearchField only triggers a search after the user presses enter—adding the item to the selected items.
 
-4. **BasicMultiSearchField**  
+4. **BaseMultiSearchField**  
    A highly customizable version of MultiSearchField. It includes all the benefits of MultiSearchField and supports complex data types (models), where each search result can contain rich content like descriptions or images. This version requires additional parameters, trading ease of use for flexibility.
 
 ## Features
@@ -103,10 +103,10 @@ OptimizedSearchField(
 ```
 
 ---
-### BasicSearchField
+### BaseSearchField
 
 **Description:**  
-A much more customizable version of OptimizedSearchField. While it requires more parameters for setup, it supports both text and model-basic searches—allowing each search result to include descriptions, images, or other elements.
+A much more customizable version of OptimizedSearchField. While it requires more parameters for setup, it supports both text and model-base searches—allowing each search result to include descriptions, images, or other elements.
 
 **Pros:**  
 - Extensive customization options  
@@ -118,7 +118,7 @@ A much more customizable version of OptimizedSearchField. While it requires more
 **Example Usage:**
 
 ```dart
-BasicSearchField<MyModel>(
+BaseSearchField<MyModel>(
   labelText: 'Search',
   optionsBuilder: (TextEditingValue textEditingValue) {
     if (textEditingValue.text.isEmpty) {
@@ -143,7 +143,7 @@ BasicSearchField<MyModel>(
 ### MultiSearchField
 
 **Description:**  
-A search field tailored for array-basic searches. It does not trigger actions on every keystroke. Instead, it waits until the user presses enter to trigger a method that adds the typed element to the selected items.
+A search field tailored for array-base searches. It does not trigger actions on every keystroke. Instead, it waits until the user presses enter to trigger a method that adds the typed element to the selected items.
 
 **Pros:**  
 - Ideal for building multi-selection inputs  
@@ -173,10 +173,10 @@ MultiSearchField(
 ```
 
 ---
-### BasicMultiSearchField
+### BaseMultiSearchField
 
 **Description:**  
-A highly customizable version of MultiSearchField that supports model-basic searches. Each search result can include rich content such as descriptions and images, offering greater flexibility at the cost of a more complex configuration.
+A highly customizable version of MultiSearchField that supports model-base searches. Each search result can include rich content such as descriptions and images, offering greater flexibility at the cost of a more complex configuration.
 
 **Pros:**  
 - High customizability for multi-selection scenarios  
@@ -188,7 +188,7 @@ A highly customizable version of MultiSearchField that supports model-basic sear
 **Example Usage:**
 
 ```dart
-BasicMultiSearchField<MyModel>(
+BaseMultiSearchField<MyModel>(
   labelText: 'Search Items',
   dropDownList: myModelList,
   values: selectedModels,
@@ -225,7 +225,7 @@ BasicMultiSearchField<MyModel>(
 
 ## Public API Documentation
 
-### BasicMultiSearchField
+### BaseMultiSearchField
 
 **Properties:**
 

@@ -27,7 +27,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('Basic Search Field', (tester) async {
+  testWidgets('Base Search Field', (tester) async {
     String? textValue;
     final menuHeigh = ValueNotifier<double>(400);
     await initTest(
@@ -35,7 +35,7 @@ void main() {
       child: ValueListenableBuilder<double>(
         valueListenable: menuHeigh,
         builder: (BuildContext context, double value, child) {
-          return BasicSearchField<String>(
+          return BaseSearchField<String>(
             onChanged: (text) => textValue = text,
             labelText: 'Enter Item',
             item: null,
@@ -47,6 +47,7 @@ void main() {
                 const EdgeInsets.symmetric(vertical: 16),
               ),
             ),
+            getItemText: (value) => value,
             menuMaxHeight: value,
             listItemKey: listdItemsKey,
             textFieldKey: textFieldKey,

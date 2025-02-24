@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:optimized_search_field/basic_multi_search_field.dart';
+import 'package:optimized_search_field/base_multi_search_field.dart';
 
 /// A widget that provides a multi-select search field with dropdown options.
 class MultiSearchField extends StatelessWidget {
@@ -233,7 +233,7 @@ class MultiSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasicMultiSearchField<String>(
+    return BaseMultiSearchField<String>(
       textFieldKey: textFieldKey,
       onSelected: onSelected,
       labelText: labelText,

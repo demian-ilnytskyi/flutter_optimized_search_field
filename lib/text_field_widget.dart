@@ -1,4 +1,4 @@
-part of 'basic_search_field.dart';
+part of 'base_search_field.dart';
 
 class _TextFieldWidget extends StatelessWidget {
   const _TextFieldWidget({

@@ -5,9 +5,9 @@ import 'package:optimized_search_field/optimized_search_field.dart';
 
 part 'selected_chip.dart';
 
-/// A basic multi-select search field widget with customizable options.
-class BasicMultiSearchField<T extends Object> extends StatefulWidget {
-  const BasicMultiSearchField({
+/// A base multi-select search field widget with customizable options.
+class BaseMultiSearchField<T extends Object> extends StatefulWidget {
+  const BaseMultiSearchField({
     required this.onSelected,
     required this.labelText,
     required this.dropDownList,
@@ -252,12 +252,12 @@ class BasicMultiSearchField<T extends Object> extends StatefulWidget {
   final Key? selectedListItemKey;
 
   @override
-  State<BasicMultiSearchField<T>> createState() =>
-      _BasicMultiSearchFieldState<T>();
+  State<BaseMultiSearchField<T>> createState() =>
+      _BaseMultiSearchFieldState<T>();
 }
 
-class _BasicMultiSearchFieldState<T extends Object>
-    extends State<BasicMultiSearchField<T>> {
+class _BaseMultiSearchFieldState<T extends Object>
+    extends State<BaseMultiSearchField<T>> {
   late TextEditingController controller;
   late FocusNode focusNode;
 
@@ -290,7 +290,7 @@ class _BasicMultiSearchFieldState<T extends Object>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BasicSearchField<T>(
+        BaseSearchField<T>(
           isRequired: widget.isRequired,
           textFieldKey: widget.textFieldKey,
           labelText: widget.labelText,
@@ -353,6 +353,7 @@ class _BasicMultiSearchFieldState<T extends Object>
           menuList: widget.menuList,
           listKey: widget.listKey,
           listItemKey: widget.listItemKey,
+          getItemText: widget.getItemText,
         ),
         SizedBox(
           height: widget.selectListSpacing,
