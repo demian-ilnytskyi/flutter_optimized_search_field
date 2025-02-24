@@ -74,6 +74,7 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
     this.listItemKey,
     this.selectedListKey,
     this.selectedListItemKey,
+    this.useFindChildIndexCallback = true,
   });
 
   // Callback for text change
@@ -177,6 +178,9 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
 
   // Whether to use the prototype
   final bool usePrototype;
+
+  /// Whether to use the find child index callback
+  final bool useFindChildIndexCallback;
 
   // Custom text field widget
   final Widget Function({
@@ -379,6 +383,7 @@ class _BaseMultiSearchFieldState<T extends Object>
           menuList: widget.menuList,
           listKey: widget.listKey,
           listItemKey: widget.listItemKey,
+          useFindChildIndexCallback: widget.useFindChildIndexCallback,
         ),
         SizedBox(
           height: widget.selectListSpacing,

@@ -66,6 +66,7 @@ class MultiSearchField extends StatelessWidget {
     this.selectedListKey,
     this.selectedListItemKey,
     this.selectedWidget,
+    this.useFindChildIndexCallback = true,
   });
 
   /// Callback for text change
@@ -239,6 +240,9 @@ class MultiSearchField extends StatelessWidget {
   // Widget for the selected item
   final Widget Function(String value)? selectedWidget;
 
+  /// Whether to use the find child index callback
+  final bool useFindChildIndexCallback;
+
   @override
   Widget build(BuildContext context) {
     return BaseMultiSearchField<String>(
@@ -314,6 +318,7 @@ class MultiSearchField extends StatelessWidget {
       selectedListItemKey: selectedListItemKey,
       selectedListKey: selectedListKey,
       selectedWidget: selectedWidget,
+      useFindChildIndexCallback: useFindChildIndexCallback,
     );
   }
 }
