@@ -78,15 +78,11 @@ class _SelectedChipWidget extends StatelessWidget {
       );
 }
 
-final defaultCancelChipButtonStyle = ButtonStyle(
-  padding: WidgetStateProperty.all(
-    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-  ),
+final defaultCancelChipButtonStyle = TextButton.styleFrom(
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
   alignment: Alignment.center,
-  backgroundColor: MaterialStateProperty.all(const Color(0xffc4fffc)),
-  shape: MaterialStateProperty.all(
-    const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(32)),
-    ),
+  backgroundColor: const Color(0xffc4fffc),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(32)),
   ),
 );

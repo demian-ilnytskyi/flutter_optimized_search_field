@@ -422,7 +422,9 @@ class _BaseSearchFieldState<T extends Object>
                     dragStartBehavior: widget.listDragStartBehavior,
                     physics: widget.listPhysics,
                     primary: widget.listPrimary,
-                    prototypeItem: options.isNotEmpty ? getItem(0) : null,
+                    prototypeItem: widget.usePrototype && options.isNotEmpty
+                        ? getItem(0)
+                        : null,
                     findChildIndexCallback: widget.useFindChildIndexCallback
                         ? (key) {
                             if (key is ValueKey<T>) {

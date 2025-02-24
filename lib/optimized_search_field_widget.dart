@@ -52,6 +52,7 @@ class OptimizedSearchField extends StatelessWidget {
     this.listPrimary,
     this.fieldIconKey,
     this.menuList,
+    this.useFindChildIndexCallback = true,
   });
 
   /// Callback for text change
@@ -171,6 +172,9 @@ class OptimizedSearchField extends StatelessWidget {
   final ScrollPhysics? listPhysics;
   final bool? listPrimary;
 
+  /// Whether to use the find child index callback
+  final bool useFindChildIndexCallback;
+
   final Key? fieldIconKey;
 
   /// Custom list widget
@@ -235,6 +239,7 @@ class OptimizedSearchField extends StatelessWidget {
       customTextField: customTextField,
       fieldIconKey: fieldIconKey,
       menuList: menuList,
+      useFindChildIndexCallback: useFindChildIndexCallback,
     );
   }
 }
