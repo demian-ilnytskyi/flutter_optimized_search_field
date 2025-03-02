@@ -5,7 +5,7 @@ import 'package:optimized_search_field/optimized_search_field.dart';
 void main() {
   const testText = 'test_text';
   const textFieldKey = Key('text_field');
-  const listdKey = Key('list');
+  const listKey = Key('list');
   const listdItemsKey = Key('list_item');
   const selectedListKey = Key('selected_list');
   const selectedListdItemsKey = Key('selected_list_item');
@@ -44,11 +44,22 @@ void main() {
             values: value,
             onSelected: (value) =>
                 textValues.value = List.from(textValues.value)..add(value),
-            listKey: listdKey,
+            listKey: listKey,
             listItemKey: listdItemsKey,
             selectedListItemKey: selectedListdItemsKey,
             selectedListKey: selectedListKey,
             textFieldKey: textFieldKey,
+            fieldSuffixIcon: ({
+              required menuOpened,
+              required onCloseIconTap,
+              required onlyCloseMenu,
+            }) =>
+                menuOpened
+                    ? IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: onCloseIconTap,
+                      )
+                    : const Icon(Icons.arrow_drop_down),
           );
         },
       ),
@@ -56,7 +67,7 @@ void main() {
 
     expect(find.byKey(textFieldKey), findsOneWidget);
 
-    expect(find.byKey(listdKey), findsNothing);
+    expect(find.byKey(listKey), findsNothing);
 
     expect(find.byKey(listdItemsKey), findsNothing);
 
@@ -70,7 +81,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(listdKey), findsOneWidget);
+    expect(find.byKey(listKey), findsOneWidget);
 
     expect(find.byKey(listdItemsKey), findsWidgets);
 
@@ -82,7 +93,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(listdKey), findsNothing);
+    expect(find.byKey(listKey), findsNothing);
 
     expect(find.byKey(listdItemsKey), findsNothing);
 
@@ -96,7 +107,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(listdKey), findsOneWidget);
+    expect(find.byKey(listKey), findsOneWidget);
 
     expect(find.byKey(listdItemsKey), findsWidgets);
 
@@ -104,7 +115,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.byKey(listdKey), findsNothing);
+    expect(find.byKey(listKey), findsNothing);
 
     expect(find.byKey(listdItemsKey), findsNothing);
 

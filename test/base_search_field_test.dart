@@ -39,13 +39,9 @@ void main() {
             onChanged: (text) => textValue = text,
             labelText: 'Enter Item',
             item: null,
-            itemStyle: ButtonStyle(
-              shape: MaterialStateProperty.all(
-                const RoundedRectangleBorder(),
-              ),
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(vertical: 16),
-              ),
+            itemStyle: TextButton.styleFrom(
+              shape: const RoundedRectangleBorder(),
+              padding: const EdgeInsets.symmetric(vertical: 16),
             ),
             getItemText: (value) => value,
             menuMaxHeight: value,
@@ -81,6 +77,7 @@ void main() {
               itemCount: length,
               itemBuilder: (context, index) => item(index),
             ),
+            fieldSuffixIcon: null,
             customTextField: ({
               required controller,
               required focusNode,

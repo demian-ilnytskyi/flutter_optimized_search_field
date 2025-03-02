@@ -10,6 +10,7 @@ class MultiSearchField extends StatelessWidget {
     required this.labelText,
     required this.dropDownList,
     required this.removeEvent,
+    required this.fieldSuffixIcon,
     required this.values,
     required this.onSelected,
     this.selectListSpacing = 8,
@@ -19,8 +20,6 @@ class MultiSearchField extends StatelessWidget {
     this.menuMargin = const EdgeInsets.only(top: 4, bottom: 8),
     this.listPadding = const EdgeInsets.symmetric(vertical: 16),
     this.listClipBehavior = Clip.hardEdge,
-    this.fieldActiveIcon = const Icon(Icons.close),
-    this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
     this.textFieldKey,
     Key? key,
     this.showErrorText,
@@ -34,7 +33,6 @@ class MultiSearchField extends StatelessWidget {
     this.itemsSpace,
     this.itemStyle,
     this.fieldDecoration,
-    this.fieldSuffixIcon,
     this.selectedItemMaxLines,
     this.selectedItemStyle,
     this.selectedItemTextStyle,
@@ -132,14 +130,12 @@ class MultiSearchField extends StatelessWidget {
   /// Decoration for the search field
   final InputDecoration? fieldDecoration;
 
-  /// Active icon for the search field
-  final Icon fieldActiveIcon;
-
-  /// Inactive icon for the search field
-  final Icon fieldInactiveIcon;
-
   /// Suffix icon for the search field
-  final Widget? fieldSuffixIcon;
+  final Widget Function({
+    required VoidCallback onCloseIconTap,
+    required bool menuOpened,
+    required VoidCallback onlyCloseMenu,
+  })? fieldSuffixIcon;
 
   /// Maximum number of lines for the selected item
   final int? selectedItemMaxLines;
@@ -172,7 +168,7 @@ class MultiSearchField extends StatelessWidget {
   final Widget Function({
     required GlobalKey key,
     required Key? textFieldKey,
-    required Widget suffixIcon,
+    required Widget? suffixIcon,
     required TextEditingController controller,
     required FocusNode focusNode,
     required void Function(String)? onChanged,
@@ -270,8 +266,6 @@ class MultiSearchField extends StatelessWidget {
       itemStyle: itemStyle,
       listClipBehavior: listClipBehavior,
       fieldDecoration: fieldDecoration,
-      fieldActiveIcon: fieldActiveIcon,
-      fieldInactiveIcon: fieldInactiveIcon,
       fieldSuffixIcon: fieldSuffixIcon,
       customTextField: customTextField,
       selectedItemMaxLines: selectedItemMaxLines,

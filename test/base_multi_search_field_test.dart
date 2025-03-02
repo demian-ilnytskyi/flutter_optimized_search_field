@@ -50,19 +50,15 @@ void main() {
                   textValues.value,
                 )..remove(value),
                 labelText: 'Enter Item',
-                item: (value) => Text(value),
+                item: (element) => Text(element),
                 dropDownList: values,
                 values: list,
                 showErrorText: true,
                 errorText: 'Error',
                 getItemText: null,
-                itemStyle: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    const RoundedRectangleBorder(),
-                  ),
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 16),
-                  ),
+                itemStyle: TextButton.styleFrom(
+                  shape: const RoundedRectangleBorder(),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 selectedItemStyle: const ButtonStyle(),
                 selectedListKey: selectedListKey,
@@ -98,6 +94,7 @@ void main() {
                   itemCount: length,
                   itemBuilder: (context, index) => item(index),
                 ),
+                fieldSuffixIcon: null,
                 customTextField: ({
                   required controller,
                   required focusNode,

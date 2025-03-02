@@ -1,15 +1,15 @@
 ## 0.0.1
-Init Version
+- Init Version
 ## 0.0.1+1
-Updated ReadMe
+- Updated ReadMe
 ## 0.0.1+2
-Updated ReadMe
+- Updated ReadMe
 ## 0.0.1+3
-Updated ReadMe and Comments
+- Updated ReadMe and Comments
 ## 0.5.0
-Support Flutter version >=2.0.0 <3.16.0
+- Support Flutter version >=2.0.0 <3.16.0
 ## 1.0.0
-Release Version. Fix some functionality and added tests
+- Release Version. Fix some functionality and added tests
 ## 1.0.0+1
 - Removed wrong assert
 ## 1.0.0+2
@@ -18,3 +18,5 @@ Release Version. Fix some functionality and added tests
 - Updated Changelog
 ## 1.0.1
 - Support Flutter version >=2.0.0 <3.16.0
+## 1.0.2
+- Remove event and values for MultiSearchField use String

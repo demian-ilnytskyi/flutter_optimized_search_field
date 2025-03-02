@@ -68,6 +68,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               menuMaxHeight: 200,
+              fieldSuffixIcon: ({
+                required menuOpened,
+                required onCloseIconTap,
+                required onlyCloseMenu,
+              }) =>
+                  menuOpened
+                      ? IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: onCloseIconTap,
+                        )
+                      : const Icon(Icons.arrow_drop_down),
             ),
             const SizedBox(height: 200),
             MultiSearchField(
@@ -84,6 +95,7 @@ class _HomePageState extends State<HomePage> {
                 currentItems.add(text);
               }),
               menuMaxHeight: 400,
+              fieldSuffixIcon: null,
             ),
             const SizedBox(height: 800),
           ],
