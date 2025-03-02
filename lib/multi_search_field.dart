@@ -12,6 +12,7 @@ class MultiSearchField extends StatelessWidget {
     required this.removeEvent,
     required this.values,
     required this.onSelected,
+    required this.fieldSuffixIcon,
     this.selectListSpacing = 8,
     this.selectListItemSpacing = 8,
     this.selectListItemRunSpacing = 8,
@@ -19,8 +20,6 @@ class MultiSearchField extends StatelessWidget {
     this.menuMargin = const EdgeInsets.only(top: 4, bottom: 8),
     this.listPadding = const EdgeInsets.symmetric(vertical: 16),
     this.listClipBehavior = Clip.hardEdge,
-    this.fieldActiveIcon = const Icon(Icons.close),
-    this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
     this.usePrototype = true,
     this.textFieldKey,
     super.key,
@@ -35,7 +34,6 @@ class MultiSearchField extends StatelessWidget {
     this.itemsSpace,
     this.itemStyle,
     this.fieldDecoration,
-    this.fieldSuffixIcon,
     this.selectedItemMaxLines,
     this.selectedItemStyle,
     this.selectedItemTextStyle,
@@ -73,7 +71,7 @@ class MultiSearchField extends StatelessWidget {
   final void Function(String text)? onSelected;
 
   /// Label text for the search field
-  final String labelText;
+  final String? labelText;
 
   /// List of dropdown items
   final List<String> dropDownList;
@@ -135,14 +133,12 @@ class MultiSearchField extends StatelessWidget {
   /// Decoration for the search field
   final InputDecoration? fieldDecoration;
 
-  /// Active icon for the search field
-  final Icon fieldActiveIcon;
-
-  /// Inactive icon for the search field
-  final Icon fieldInactiveIcon;
-
   /// Suffix icon for the search field
-  final Widget? fieldSuffixIcon;
+  final Widget Function({
+    required VoidCallback onCloseIconTap,
+    required bool menuOpened,
+    required VoidCallback onlyCloseMenu,
+  })? fieldSuffixIcon;
 
   /// Whether to use the prototype
   final bool usePrototype;
@@ -178,7 +174,7 @@ class MultiSearchField extends StatelessWidget {
   final Widget Function({
     required GlobalKey key,
     required Key? textFieldKey,
-    required Widget suffixIcon,
+    required Widget? suffixIcon,
     required TextEditingController controller,
     required FocusNode focusNode,
     required void Function(String)? onChanged,
@@ -282,8 +278,6 @@ class MultiSearchField extends StatelessWidget {
       itemStyle: itemStyle,
       listClipBehavior: listClipBehavior,
       fieldDecoration: fieldDecoration,
-      fieldActiveIcon: fieldActiveIcon,
-      fieldInactiveIcon: fieldInactiveIcon,
       fieldSuffixIcon: fieldSuffixIcon,
       usePrototype: usePrototype,
       customTextField: customTextField,

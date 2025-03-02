@@ -18,6 +18,7 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
     required this.item,
     required this.optionsBuilder,
     required this.getItemText,
+    required this.fieldSuffixIcon,
     this.errorText,
     this.showErrorText,
     this.selectListSpacing = 8,
@@ -27,8 +28,6 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
     this.menuMargin = const EdgeInsets.only(top: 4, bottom: 8),
     this.listPadding = const EdgeInsets.symmetric(vertical: 16),
     this.listClipBehavior = Clip.hardEdge,
-    this.fieldActiveIcon = const Icon(Icons.close),
-    this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
     this.usePrototype = true,
     this.textFieldKey,
     this.isRequired,
@@ -44,7 +43,6 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
     this.itemsSpace,
     this.itemStyle,
     this.fieldDecoration,
-    this.fieldSuffixIcon,
     this.customTextField,
     this.selectedWidget,
     this.selectedItemMaxLines,
@@ -81,7 +79,7 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
   final void Function(String text)? onSelected;
 
   // Label text for the search field
-  final String labelText;
+  final String? labelText;
 
   // List of dropdown items
   final List<T> dropDownList;
@@ -93,10 +91,10 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
   final String? errorText;
 
   // List of selected values
-  final List<T>? values;
+  final List<String>? values;
 
   // Callback for removing an item
-  final void Function(T value)? removeEvent;
+  final void Function(String text)? removeEvent;
 
   // Focus node for the search field
   final FocusNode? focusNode;
@@ -167,14 +165,12 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
   // Decoration for the search field
   final InputDecoration? fieldDecoration;
 
-  // Active icon for the search field
-  final Icon fieldActiveIcon;
-
-  // Inactive icon for the search field
-  final Icon fieldInactiveIcon;
-
-  // Suffix icon for the search field
-  final Widget? fieldSuffixIcon;
+  /// Suffix icon for the search field
+  final Widget Function({
+    required VoidCallback onCloseIconTap,
+    required bool menuOpened,
+    required VoidCallback onlyCloseMenu,
+  })? fieldSuffixIcon;
 
   // Whether to use the prototype
   final bool usePrototype;
@@ -186,7 +182,7 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
   final Widget Function({
     required GlobalKey key,
     required Key? textFieldKey,
-    required Widget suffixIcon,
+    required Widget? suffixIcon,
     required TextEditingController controller,
     required FocusNode focusNode,
     required void Function(String)? onChanged,
@@ -194,7 +190,7 @@ class BaseMultiSearchField<T extends Object> extends StatefulWidget {
   })? customTextField;
 
   // Widget for the selected item
-  final Widget Function(T value)? selectedWidget;
+  final Widget Function(String value)? selectedWidget;
 
   // Maximum number of lines for the selected item
   final int? selectedItemMaxLines;
@@ -362,8 +358,6 @@ class _BaseMultiSearchFieldState<T extends Object>
           itemStyle: widget.itemStyle,
           listClipBehavior: widget.listClipBehavior,
           fieldDecoration: widget.fieldDecoration,
-          fieldActiveIcon: widget.fieldActiveIcon,
-          fieldInactiveIcon: widget.fieldInactiveIcon,
           fieldSuffixIcon: widget.fieldSuffixIcon,
           usePrototype: widget.usePrototype,
           customTextField: widget.customTextField,
@@ -385,10 +379,10 @@ class _BaseMultiSearchFieldState<T extends Object>
           listItemKey: widget.listItemKey,
           useFindChildIndexCallback: widget.useFindChildIndexCallback,
         ),
-        SizedBox(
-          height: widget.selectListSpacing,
-        ),
-        if (selectedValueIsNotEmpty)
+        if (selectedValueIsNotEmpty) ...[
+          SizedBox(
+            height: widget.selectListSpacing,
+          ),
           Wrap(
             key: widget.selectedListKey,
             spacing: widget.selectListItemSpacing,
@@ -399,7 +393,7 @@ class _BaseMultiSearchFieldState<T extends Object>
                   widget.selectedWidget?.call(getValue(index)) ??
                   _SelectedChipWidget(
                     widgetKey: widget.selectedListItemKey,
-                    labelText: getItemText(getValue(index)),
+                    labelText: getValue(index),
                     onPressed: () => widget.removeEvent?.call(getValue(index)),
                     maxLines: widget.selectedItemMaxLines,
                     style: widget.selectedItemStyle,
@@ -412,11 +406,13 @@ class _BaseMultiSearchFieldState<T extends Object>
                   ),
             ),
           ),
+        ],
       ],
     );
+    // }
   }
 
-  T getValue(int index) => widget.values!.elementAt(index);
+  String getValue(int index) => widget.values!.elementAt(index);
 
   String getItemText(T value) =>
       widget.getItemText?.call(value) ?? value.toString();

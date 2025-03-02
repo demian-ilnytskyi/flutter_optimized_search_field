@@ -16,6 +16,7 @@ class BaseSearchField<T extends Object> extends StatefulWidget {
     required this.onChanged,
     required this.onSelected,
     required this.getItemText,
+    required this.fieldSuffixIcon,
     this.itemStyle,
     this.unenabledList = const [],
     this.menuMaxHeight = 400,
@@ -24,8 +25,6 @@ class BaseSearchField<T extends Object> extends StatefulWidget {
     this.itemsSpace,
     this.menuDecoration,
     this.listClipBehavior = Clip.hardEdge,
-    this.fieldActiveIcon = const Icon(Icons.close),
-    this.fieldInactiveIcon = const Icon(Icons.arrow_drop_down),
     this.textFieldKey,
     this.isRequired,
     this.displayStringForOption,
@@ -39,7 +38,6 @@ class BaseSearchField<T extends Object> extends StatefulWidget {
     this.errorMaxLines,
     this.description,
     this.textStyle,
-    this.fieldSuffixIcon,
     this.customTextField,
     this.menuList,
     this.listButtonItem,
@@ -142,14 +140,12 @@ class BaseSearchField<T extends Object> extends StatefulWidget {
   /// Clip behavior for the list
   final Clip listClipBehavior;
 
-  /// Active icon for the search field
-  final Icon fieldActiveIcon;
-
-  /// Inactive icon for the search field
-  final Icon fieldInactiveIcon;
-
   /// Suffix icon for the search field
-  final Widget? fieldSuffixIcon;
+  final Widget Function({
+    required VoidCallback onCloseIconTap,
+    required bool menuOpened,
+    required VoidCallback onlyCloseMenu,
+  })? fieldSuffixIcon;
 
   /// Custom list widget
   final Widget Function({
@@ -182,7 +178,7 @@ class BaseSearchField<T extends Object> extends StatefulWidget {
   final Widget Function({
     required GlobalKey key,
     required Key? textFieldKey,
-    required Widget suffixIcon,
+    required Widget? suffixIcon,
     required TextEditingController controller,
     required FocusNode focusNode,
     required void Function(String)? onChanged,
@@ -498,22 +494,29 @@ class _BaseSearchFieldState<T extends Object>
     );
   }
 
-  Widget get _suffixIcon => Padding(
+  Widget? get _suffixIcon {
+    final icon = widget.fieldSuffixIcon?.call(
+      menuOpened: showActiveIcon,
+      onCloseIconTap: () {
+        focusNode.unfocus();
+        controller.clear();
+        widget.onChanged?.call('');
+      },
+      onlyCloseMenu: () {
+        focusNode.unfocus();
+      },
+    );
+    if (icon == null) {
+      return null;
+    } else {
+      return Padding(
         key: widget.fieldIconKey,
         padding:
             EdgeInsets.symmetric(horizontal: widget.suffixIconPadding ?? 4),
-        child: widget.fieldSuffixIcon ??
-            (showActiveIcon
-                ? IconButton(
-                    icon: widget.fieldActiveIcon,
-                    onPressed: () {
-                      focusNode.unfocus();
-                      controller.clear();
-                      widget.onChanged?.call('');
-                    },
-                  )
-                : widget.fieldInactiveIcon),
+        child: icon,
       );
+    }
+  }
 
   @override
   void dispose() {
