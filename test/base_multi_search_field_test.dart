@@ -94,6 +94,7 @@ void main() {
                   itemCount: length,
                   itemBuilder: (context, index) => item(index),
                 ),
+                fieldSuffixIcon: null,
                 customTextField: ({
                   required controller,
                   required focusNode,

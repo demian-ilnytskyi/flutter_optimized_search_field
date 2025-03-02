@@ -44,6 +44,17 @@ void main() {
         listItemKey: listdItemsKey,
         textFieldKey: textFieldKey,
         fieldIconKey: fieldIconKey,
+        fieldSuffixIcon: ({
+          required menuOpened,
+          required onCloseIconTap,
+          required onlyCloseMenu,
+        }) =>
+            menuOpened
+                ? IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: onCloseIconTap,
+                  )
+                : const Icon(Icons.arrow_drop_down),
       ),
     );
 
@@ -141,6 +152,17 @@ void main() {
         textFieldKey: textFieldKey,
         fieldIconKey: fieldIconKey,
         itemsSpace: 400,
+        fieldSuffixIcon: ({
+          required menuOpened,
+          required onCloseIconTap,
+          required onlyCloseMenu,
+        }) =>
+            menuOpened
+                ? IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: onlyCloseMenu,
+                  )
+                : const Icon(Icons.arrow_drop_down),
       ),
     );
 
@@ -167,6 +189,20 @@ void main() {
     expect(find.byKey(listdKey), findsNothing);
 
     expect(find.byKey(listdItemsKey), findsNothing);
+
+    expect(textValue, 'item 1');
+
+    await tester.tap(find.byKey(textFieldKey));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(listdKey), findsOneWidget);
+
+    await tester.tap(find.byKey(fieldIconKey));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(listdKey), findsNothing);
 
     expect(textValue, 'item 1');
   });

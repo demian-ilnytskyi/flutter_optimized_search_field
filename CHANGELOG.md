@@ -24,3 +24,5 @@
 - Updated ReadMe
 ## 2.0.1
 - Remove MaterialStateProperty
+## 2.0.2
+- Remove event and values for MultiSearchField use String
