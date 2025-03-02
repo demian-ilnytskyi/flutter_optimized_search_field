@@ -18,6 +18,8 @@
 - Updated Changelog
 ## 1.0.1
 - Support Flutter version >=2.0.0 <3.16.0
+## 1.0.2
+- Remove event and values for MultiSearchField use String
 ## 2.0.0
 - Support Flutter version >=3.16.0 <4.0.0
 ## 2.0.0+1
