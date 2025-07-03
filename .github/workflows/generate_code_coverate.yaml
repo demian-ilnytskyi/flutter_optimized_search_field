@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build_tests:
-    uses: DemienIlnytskyi/flutter_workflows/.github/workflows/push_code_coverage.yml@main
+    uses: DemianIlnytskyi/flutter_workflows/.github/workflows/push_code_coverage.yml@main
     with:
       flutter_versions: "3.16.0, 2.0.0"
       
