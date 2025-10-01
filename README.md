@@ -2,10 +2,10 @@
 
 <p align="center">
   <a href="https://pub.dev/packages/optimized_search_field"><img src="https://img.shields.io/pub/v/optimized_search_field" alt="pub"></a>
-  <a href="https://app.codecov.io/github/DemienIlnutskiy/flutter_optimized_search_field"><img src="https://img.shields.io/codecov/c/github/DemienIlnutskiy/flutter_optimized_search_field" alt="pub"></a>
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/actions/workflows/generate_code_coverate.yaml"><img src="https://img.shields.io/github/actions/workflow/status/DemienIlnutskiy/flutter_optimized_search_field/generate_code_coverate.yaml?event=push&branch=main&label=tests&logo=github" alt="tests"></a>
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/actions/workflows/ci.yaml">
-    <img src="https://img.shields.io/github/actions/workflow/status/DemienIlnutskiy/flutter_optimized_search_field/ci.yaml?event=pull_request&label=Code%20Analysis%20%26%20Formatting&logo=github" 
+  <a href="https://app.codecov.io/github/demian-ilnytskyi/flutter_optimized_search_field"><img src="https://img.shields.io/codecov/c/github/demian-ilnytskyi/flutter_optimized_search_field" alt="pub"></a>
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/actions/workflows/generate_code_coverate.yaml"><img src="https://img.shields.io/github/actions/workflow/status/demian-ilnytskyi/flutter_optimized_search_field/generate_code_coverate.yaml?event=push&branch=main&label=tests&logo=github" alt="tests"></a>
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/actions/workflows/ci.yaml">
+    <img src="https://img.shields.io/github/actions/workflow/status/demian-ilnytskyi/flutter_optimized_search_field/ci.yaml?event=pull_request&label=Code%20Analysis%20%26%20Formatting&logo=github" 
         alt="Code Analysis & Formatting">
   </a>
 </p>
@@ -20,39 +20,39 @@ A Flutter package that provides optimized search fields with various customizati
 Below are some previews demonstrating the key features of the package:
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart">
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/blob/main/lib/optimized_search_field_widget.dart">
    Search Field
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/saerch_field_preview.gif">
-    <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/saerch_field_preview.gif">
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/blob/main/assets/read_me/saerch_field_preview.gif">
+    <img src="https://raw.githubusercontent.com//demian-ilnytskyi/flutter_optimized_search_field/main/assets/read_me/saerch_field_preview.gif">
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart">
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/blob/main/lib/multi_search_field.dart">
    Multi Search
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/multi_search_field_preview.gif">
-    <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/multi_search_field_preview.gif">
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/blob/main/assets/read_me/multi_search_field_preview.gif">
+    <img src="https://raw.githubusercontent.com//demian-ilnytskyi/flutter_optimized_search_field/main/assets/read_me/multi_search_field_preview.gif">
   </a>
 </p>
 
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/lib/base_search_field.dart">
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/blob/main/lib/base_search_field.dart">
    Adaptive Menu Position
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/DemienIlnutskiy/flutter_optimized_search_field/blob/main/assets/read_me/adavptive_menu_position.gif">
-    <img src="https://raw.githubusercontent.com//DemienIlnutskiy/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
+  <a href="https://github.com/demian-ilnytskyi/flutter_optimized_search_field/blob/main/assets/read_me/adavptive_menu_position.gif">
+    <img src="https://raw.githubusercontent.com//demian-ilnytskyi/flutter_optimized_search_field/main/assets/read_me/adavptive_menu_position.gif">
   </a>
 </p>
 
