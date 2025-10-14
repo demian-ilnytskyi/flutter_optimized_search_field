@@ -15,5 +15,6 @@ concurrency:
 jobs:
   build_tests:
     uses: DemianIlnytskyi/flutter_workflows/.github/workflows/ci_build_and_test.yml@main
+    secrets: inherit
     with:
       flutter_versions: "3.16.0, 2.0.0"
