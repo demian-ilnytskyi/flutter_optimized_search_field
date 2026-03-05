@@ -301,7 +301,8 @@ class _BaseSearchFieldState<T extends Object>
 
     if (menuHeight != null && renderObject != null) {
       final renderBox = renderObject as RenderBox;
-      final screenHeight = MediaQuery.sizeOf(context).height;
+      final screenHeight = MediaQuery.sizeOf(context).height -
+          MediaQuery.viewPaddingOf(context).bottom;
       final buttonPosition = renderBox.localToGlobal(Offset.zero);
       final dy = buttonPosition.dy;
       final availableHeight = screenHeight - (dy + getHeight);
