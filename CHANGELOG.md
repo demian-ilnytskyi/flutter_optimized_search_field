@@ -61,3 +61,7 @@
 ## 2.0.3
 
 Change screen height base on keyboard size
+
+## 2.0.4
+
+Fix:` Change screen height base on keyboard size

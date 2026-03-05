@@ -50,60 +50,63 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
-          children: [
-            Text('You Entered: $currentItem',
-                style: const TextStyle(fontSize: 24)),
-            const SizedBox(height: 200),
-            OptimizedSearchField(
-              onChanged: (text) => setState(() {
-                currentItem = text;
-              }),
-              labelText: 'Enter Item',
-              dropDownList: List.generate(
-                100000,
-                (index) => 'item ${index + 1}',
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: Center(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
+            children: [
+              Text('You Entered: $currentItem',
+                  style: const TextStyle(fontSize: 24)),
+              const SizedBox(height: 200),
+              OptimizedSearchField(
+                onChanged: (text) => setState(() {
+                  currentItem = text;
+                }),
+                labelText: 'Enter Item',
+                dropDownList: List.generate(
+                  100000,
+                  (index) => 'item ${index + 1}',
+                ),
+                itemStyle: TextButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                menuMaxHeight: 200,
+                optionsViewOpenDirection: OptionsViewOpenDirection.up,
+                fieldSuffixIcon: ({
+                  required menuOpened,
+                  required onCloseIconTap,
+                  required onlyCloseMenu,
+                }) =>
+                    menuOpened
+                        ? IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: onCloseIconTap,
+                          )
+                        : const Icon(Icons.arrow_drop_down),
               ),
-              itemStyle: TextButton.styleFrom(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero),
-                padding: const EdgeInsets.symmetric(vertical: 16),
+              const SizedBox(height: 200),
+              MultiSearchField(
+                labelText: 'Enter Items',
+                dropDownList: List.generate(
+                  100,
+                  (index) => 'item ${index + 1}',
+                ),
+                removeEvent: (value) => setState(() {
+                  currentItems.remove(value);
+                }),
+                values: currentItems,
+                onSelected: (text) => setState(() {
+                  currentItems.add(text);
+                }),
+                menuMaxHeight: 400,
+                fieldSuffixIcon: null,
               ),
-              menuMaxHeight: 200,
-              optionsViewOpenDirection: OptionsViewOpenDirection.up,
-              fieldSuffixIcon: ({
-                required menuOpened,
-                required onCloseIconTap,
-                required onlyCloseMenu,
-              }) =>
-                  menuOpened
-                      ? IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: onCloseIconTap,
-                        )
-                      : const Icon(Icons.arrow_drop_down),
-            ),
-            const SizedBox(height: 200),
-            MultiSearchField(
-              labelText: 'Enter Items',
-              dropDownList: List.generate(
-                100000,
-                (index) => 'item ${index + 1}',
-              ),
-              removeEvent: (value) => setState(() {
-                currentItems.remove(value);
-              }),
-              values: currentItems,
-              onSelected: (text) => setState(() {
-                currentItems.add(text);
-              }),
-              menuMaxHeight: 400,
-              fieldSuffixIcon: null,
-            ),
-            const SizedBox(height: 800),
-          ],
+              const SizedBox(height: 800),
+            ],
+          ),
         ),
       ),
     );

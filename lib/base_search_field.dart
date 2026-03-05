@@ -219,18 +219,40 @@ class BaseSearchField<T extends Object> extends StatefulWidget {
   State<BaseSearchField<T>> createState() => _BaseSearchFieldState();
 }
 
-class _BaseSearchFieldState<T extends Object>
-    extends State<BaseSearchField<T>> {
+class _BaseSearchFieldState<T extends Object> extends State<BaseSearchField<T>>
+    with WidgetsBindingObserver {
   late GlobalKey _anchorKey;
   late GlobalKey _menuKey;
   late TextEditingController controller;
   late FocusNode focusNode;
   late bool showActiveIcon;
   late double? menuHeight;
+  double _keyboardSize = 0;
+
+  @override
+  void didChangeMetrics() {
+    _updateKeyboardSize();
+  }
+
+  void _updateKeyboardSize() {
+    final view = WidgetsBinding.instance.platformDispatcher.views.first;
+    final bottomInset = view.viewInsets.bottom / view.devicePixelRatio;
+    final keyboardDifferentSize = (bottomInset - _keyboardSize).abs();
+
+    if (keyboardDifferentSize < 10) {
+      if (bottomInset != 0) {
+        return;
+      }
+    }
+    setState(() {
+      _keyboardSize = bottomInset;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _initializeController();
     showActiveIcon = false;
     menuHeight = null;
@@ -301,8 +323,7 @@ class _BaseSearchFieldState<T extends Object>
 
     if (menuHeight != null && renderObject != null) {
       final renderBox = renderObject as RenderBox;
-      final screenHeight = MediaQuery.sizeOf(context).height -
-          MediaQuery.viewPaddingOf(context).bottom;
+      final screenHeight = MediaQuery.sizeOf(context).height - _keyboardSize;
       final buttonPosition = renderBox.localToGlobal(Offset.zero);
       final dy = buttonPosition.dy;
       final availableHeight = screenHeight - (dy + getHeight);
@@ -522,6 +543,7 @@ class _BaseSearchFieldState<T extends Object>
   @override
   void dispose() {
     focusNode.removeListener(_changeIcon);
+    WidgetsBinding.instance.removeObserver(this);
     if (widget.controller == null) controller.dispose();
     if (widget.focusNode == null) focusNode.dispose();
     super.dispose();
