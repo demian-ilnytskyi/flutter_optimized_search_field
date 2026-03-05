@@ -137,4 +137,69 @@ void main() {
 
     expect(textValue, 'item 1');
   });
+
+  testWidgets('Keyboard size update coverage', (tester) async {
+    await initTest(
+      tester: tester,
+      child: BaseSearchField<String>(
+        onChanged: (_) {},
+        onSelected: (_) {},
+        labelText: 'Test',
+        item: Text.new,
+        optionsBuilder: (_) => ['A', 'B'],
+        getItemText: (val) => val,
+        fieldSuffixIcon: null,
+      ),
+    );
+
+    // 1. Trigger large change (> 10)
+    tester.view.viewInsets = const FakeViewPadding(bottom: 300);
+    tester.platformDispatcher.onMetricsChanged?.call();
+    await tester.pump();
+
+    // 2. Trigger small change (< 10) but not 0 -> should return early
+    tester.view.viewInsets = const FakeViewPadding(bottom: 305);
+    tester.platformDispatcher.onMetricsChanged?.call();
+    await tester.pump();
+
+    // 3. Trigger change to exactly 0 (even if small diff) ->
+    // should NOT return early
+    // First set to 1
+    tester.view.viewInsets = const FakeViewPadding(bottom: 1);
+    tester.platformDispatcher.onMetricsChanged?.call();
+    await tester.pump();
+
+    // Now set to 0. Diff is 1 (< 10)
+    tester.view.viewInsets = FakeViewPadding.zero;
+    tester.platformDispatcher.onMetricsChanged?.call();
+    await tester.pump();
+  });
+
+  testWidgets('didUpdateWidget menuMaxHeight change', (tester) async {
+    final menuHeight = ValueNotifier<double>(400);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ValueListenableBuilder<double>(
+            valueListenable: menuHeight,
+            builder: (context, value, child) {
+              return BaseSearchField<String>(
+                onChanged: (_) {},
+                onSelected: (_) {},
+                labelText: 'Test',
+                item: Text.new,
+                optionsBuilder: (_) => ['A', 'B'],
+                getItemText: (val) => val,
+                fieldSuffixIcon: null,
+                menuMaxHeight: value,
+              );
+            },
+          ),
+        ),
+      ),
+    );
+
+    menuHeight.value = 500;
+    await tester.pump();
+  });
 }
